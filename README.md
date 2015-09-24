@@ -36,7 +36,7 @@ instructional team and classmates, please follow the
 | **Instructor**            | Jimmy Garzon       | @jimmygarzon        | jimmy.garzon@ga.co       | [jimbog](jimbog) |
 | **Instructor**            | Tony Guerrero      | @toneloke           | david.guerrero@ga.co     | [toneloke](toneloke) |
 | **Instructor**            | Bensen Fan         | @bensenfan          | beichen.fan@ga.co        |  [bensenfan](bensenfan)|
-| **Instructor**            | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [philuchansky](philuchansky) |
+| **Instructor Associate**  | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [philuchansky](philuchansky) |
 | **Instructional Support** | Meredith Bryan     | @meredith.bryan     | meredith.bryan@ga.co     | [mer8](mer8) |
 
 ### TAs
@@ -85,8 +85,8 @@ If you want to email the entire class and the instructional team, please use:
 
 | Date             | Day of Week | Event |
 |:----------------:|:-----------:|:------|
-| **Spetember 24** | Thursday    | **Orientation & Installfest** |
-| **Spetember 28** | Monday      | **First day of WDI!** |
+| **September 24** | Thursday    | **Orientation & Installfest** |
+| **September 28** | Monday      | **First day of WDI!** |
 | **Nov. 26-29**   | Thurs.-Sun. | **Thanksgiving Break (NO CLASS/CAMPUS CLOSED)** |
 | **December 18**  | Friday      | **Last day of class & graduation!** |
 
