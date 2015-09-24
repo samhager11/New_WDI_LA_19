@@ -36,7 +36,8 @@ instructional team and classmates, please follow the
 | **Instructor**            | Jimmy Garzon       | @jimmygarzon        | jimmy.garzon@ga.co       | [jimbog](jimbog) |
 | **Instructor**            | Tony Guerrero      | @toneloke           | david.guerrero@ga.co     | [toneloke](toneloke) |
 | **Instructor**            | Bensen Fan         | @bensenfan          | beichen.fan@ga.co        |  [bensenfan](bensenfan)|
-| **Instructional Support** | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [mer8](mer8) |
+| **Instructor**            | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [philuchansky](philuchansky) |
+| **Instructional Support** | Meredith Bryan     | @meredith.bryan     | meredith.bryan@ga.co     | [mer8](mer8) |
 
 ### TAs
 To be announced soon!
