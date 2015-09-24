@@ -32,11 +32,11 @@ instructional team and classmates, please follow the
 
 | Role                      | Name               | Slack               | Email                    | GitHub |
 |---------------------------|--------------------|:-------------------:|:------------------------:|:------:|
-| **Course Producer**       | Taylor Higgins     | @taylorhiggins      | taylorh@ga.co            | [taylorhiggins][taylorhiggins] |
-| **Instructor**            | Jimmy Garzon       | @jimmygarzon        | jimmy.garzon@ga.co       | [jimbog][jimbog] |
-| **Instructor**            | Tony Guerrero      | @toneloke           | david.guerrero@ga.co     | [toneloke][toneloke] |
-| **Instructor**            | Bensen Fan         | @bensenfan          | beichen.fan@ga.co        |  [bensenfan][bensenfan]|
-| **Instructional Support** | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [mer8][mer8] |
+| **Course Producer**       | Taylor Higgins     | @taylorhiggins      | taylorh@ga.co            | [taylorhiggins](taylorhiggins) |
+| **Instructor**            | Jimmy Garzon       | @jimmygarzon        | jimmy.garzon@ga.co       | [jimbog](jimbog) |
+| **Instructor**            | Tony Guerrero      | @toneloke           | david.guerrero@ga.co     | [toneloke](toneloke) |
+| **Instructor**            | Bensen Fan         | @bensenfan          | beichen.fan@ga.co        |  [bensenfan](bensenfan)|
+| **Instructional Support** | Philippe Luchansky | @philippe.luchansky | philippe.luchansky@ga.co | [mer8](mer8) |
 
 ### TAs
 To be announced soon!
@@ -86,7 +86,7 @@ If you want to email the entire class and the instructional team, please use:
 |:----------------:|:-----------:|:------|
 | **Spetember 24** | Thursday    | **Orientation & Installfest** |
 | **Spetember 28** | Monday      | **First day of WDI!** |
-| **Nov. 26-29**   | Thurs.-Sun. | Thanksgiving Break (NO CLASS/CAMPUS CLOSED) |
+| **Nov. 26-29**   | Thurs.-Sun. | **Thanksgiving Break (NO CLASS/CAMPUS CLOSED)** |
 | **December 18**  | Friday      | **Last day of class & graduation!** |
 
 Note: in the weeks following your graduation, there will be a number of various
