@@ -64,10 +64,6 @@ To be announced soon!
 
 ### Class
 
-If you want to email the entire class and the instructional team, please use:   
-**wdi-la-19@ga-groups.com**, our Google Group (aka listserv)!
-
-### Philippe, I need you to update the student section! Thanks. - Mer
 | Name               | Email | [Slack](https://ga-students.slack.com) | GitHub |
 |--------------------|:----------------------------:|:---------------:|:------:|
 | Daniel Oh          | doh422@gmail.com             | @daniel_oh      | [doh422](https://github.com/doh422) |
