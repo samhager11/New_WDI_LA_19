@@ -66,35 +66,35 @@ To be announced soon!
 
 | Name               | Email | [Slack](https://ga-students.slack.com) | GitHub |
 |--------------------|:----------------------------:|:---------------:|:------:|
-| Alexander Juneja   | alexjuneja1@gmail.com        | @alexjuneja1    |  |
+| Alexander Juneja   | alexjuneja1@gmail.com        | @alexjuneja1    | [alexjuneja1](https://github.com/alexjuneja1) |
 | Andy Kim           | andyjinkim@gmail.com         | @andyjinkim     | [andyjinkim](https://github.com/andyjinkim) |
-| Bria Frager        | btfrager@gmail.com           | @bfrager        |  |
+| Brian Frager       | btfrager@gmail.com           | @bfrager        | [bfrager](https://github.com/bfrager)|
 | Colin Chan         | clnsdabst@gmail.com          | @colinchan      | [colinchan89](https://github.com/colinchan89) |
-| Crystal	Murray     | crystalsmurray@gmail.com     | @crystalgel     |  |
+| Crystal	Murray     | crystalsmurray@gmail.com     | @crystalgel     | [crystalgel](https://github.com/crystalgel)|
 | Dan McQuillan      | djmcquillan76@gmail.com      | @djmcquillan76  | [djmcquillan](https://github.com/djmcquillan) |
 | Eddie Jung         | ejung716@gmail.com           | @eddiejung      | [ebotsupreme](https://github.com/ebotsupreme) |
 | Ellie Shahla       | ess9213@yahoo.com            | @eshahla        | [eshahla](https://github.com/eshahla) |
 | Emma Gilhuly       | emmagilhuly@me.com           | @emmagilhuly    | [emmagilhuly](https://github.com/emmagilhuly) |
-| Eunice Chang       | omgunis@gmail.com            | @eunice         |  |
+| Eunice Chang       | omgunis@gmail.com            | @eunice         | [omgunis](https://github.com/omgunis) |
 | Genny Langan       | cglangan78@gmail.com         | @cglangan78     | [cglangan78](https://github.com/cglangan78) |
 | Ivy Wong           | ivykww@gmail.com             | @llovee91       | [llovee91](https://github.com/llovee91) |
-| John Meredith      | johnm589@yahoo.com           | @johnm          |  |
+| John Meredith      | johnm589@yahoo.com           | @johnm          | [johnm589](https://github.com/johnm589) |
 | Juan G Ruelas Jr   | jruel006@ucr.edu             | @channeljuannews| [jruel006](https://github.com/jruel006) |
 | Ken Carrington     | kcarring93@verizon.net       | @kcarring       | [K-Carrington](https://github.com/K-Carrington) |
 | Kevin Williams     | kevin.williams@onidaprep.com | @kjwilliams     | [KJWBeige](https://github.com/KJWBeige) |
 | Kristen Gunn       | ohkristen@creativekdg.com    | @kristengunn    | [ohkristen](https://github.com/ohkristen) |
 | Lilly Ghassemieh   | lillygh@gmail.com            | @lillygh        | [lillygh](https://github.com/lillygh) |
 | Nick Hendren       | nhendren7@gmail.com          | @nickhendren    | [nickhendren](https://github.com/nickhendren) |
-| Rich Donnellan     | rich.donnellan@gmail.com     |                 |  |
-| Sam Richardson     | samrichardson01@hotmail.com  |                 |  |
+| Rich Donnellan     | rich.donnellan@gmail.com     | @rich.donnellan | [RichDonnellan](https://github.com/RichDonnellan) |
+| Sam Richardson     | samrichardson01@hotmail.com  | @samrich93      | [samrich93](https://github.com/samrich93) |
 | Sam Hager          | sam.hager11@gmail.com        | @samhager11     | [shager11](https://github.com/shager11) |
 | Santiago Casar     | santiago@nowhereprod.com     | @santiagon      | [sanjarito](https://github.com/sanjarito) |
 | Sean Hall          | seanhall22@gmail.com         | @seanh          | [SeanH22](https://github.com/SeanH22) |
 | Sean Esteva        | seangeleno@gmail.com         | @seangeleno     | [seangeleno](https://github.com/seangeleno) |
-| Seri Orfali        | seriorfali@gmail.com         | @seriorfali     |  |
+| Seri Orfali        | seriorfali@gmail.com         | @seriorfali     | [seriorfali](https://github.com/seriorfali) |
 | Stefanie Koenig    | stefanie.l.koenig@gmail.com  | @skoenig        | [stefkoenig](https://github.com/stefkoenig) |
-| Theda Tech         | fridaylemons@gmail.com       | @thedalicioustechopich | [](https://github.com/) |
-| Ted Shumway        | shumway.ted@gmail.com        | @tedshumway     |  |
+| Theda Tech         | fridaylemons@gmail.com       | @thedalicioustechopich | [ThedaLicious](https://github.com/ThedaLicious) |
+| Ted Shumway        | shumway.ted@gmail.com        | @tedshumway     | [teddy310](https://github.com/teddy310) |
 | Veronica Sykes     | vasykes@gmail.com            | @veronicasykes  | [veronicasykes](https://github.com/veronicasykes) |
 
 
