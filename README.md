@@ -67,7 +67,7 @@ To be announced soon!
 | Name               | Email | [Slack](https://ga-students.slack.com) | GitHub |
 |--------------------|:----------------------------:|:---------------:|:------:|
 | Alexander Juneja   | alexjuneja1@gmail.com        | @alexjuneja1    |  |
-| Andrew Kim         | andyjinkim@gmail.com         | @andrewkim      | [andyjinkim](https://github.com/andyjinkim) |
+| Andy Kim           | andyjinkim@gmail.com         | @andyjinkim     | [andyjinkim](https://github.com/andyjinkim) |
 | Bria Frager        | btfrager@gmail.com           | @bfrager        |  |
 | Colin Chan         | clnsdabst@gmail.com          | @colinchan      | [colinchan89](https://github.com/colinchan89) |
 | Crystal	Murray     | crystalsmurray@gmail.com     | @crystalgel     |  |
