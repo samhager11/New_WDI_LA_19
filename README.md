@@ -73,7 +73,7 @@ To be announced soon!
 | Crystal	Murray     | crystalsmurray@gmail.com     | @crystalgel     |  |
 | Dan McQuillan      | djmcquillan76@gmail.com      | @djmcquillan76  | [djmcquillan](https://github.com/djmcquillan) |
 | Eddie Jung         | ejung716@gmail.com           | @eddiejung      | [ebotsupreme](https://github.com/ebotsupreme) |
-| Ellie Shahla       | ess9213@yahoo.com            | @eshahla        |  |
+| Ellie Shahla       | ess9213@yahoo.com            | @eshahla        | [eshahla](https://github.com/eshahla) |
 | Emma Gilhuly       | emmagilhuly@me.com           | @emmagilhuly    | [emmagilhuly](https://github.com/emmagilhuly) |
 | Eunice Chang       | omgunis@gmail.com            | @eunice         |  |
 | Genny Langan       | cglangan78@gmail.com         | @cglangan78     | [cglangan78](https://github.com/cglangan78) |
