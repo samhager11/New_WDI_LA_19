@@ -1,0 +1,82 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
+body{
+    font-family:Lato, sans-serif;
+    color:#555;
+    background: #EAEAEA;
+}
+
+#calculator {
+    width: 400px;
+    height: 350px;
+    border: 2px solid #333;
+    margin: 120px auto 0;
+    background:#000;
+}
+
+#readout {
+    border:1px solid #666;
+    width:283px;
+    height:68px;
+    text-align:right;
+    float:right;
+    display:block;
+    font-size: 40px;
+    line-height: 68px;
+    padding-right:15px;
+    background:#FFF;
+}
+
+button {
+    width:100px;
+    height:70px;
+    padding:10px;
+    display:block;
+    float:left;
+    font-size: 32px;
+    font-family:Lato, sans-serif;
+    color:#FFF;
+    border: 1px solid #333333;
+    background-color:#AAAAAA;
+    cursor:pointer;
+    -webkit-transition: all .2s; /* Safari */
+    transition: all .2s;
+}
+
+button:active, button:focus {
+    outline:none;
+}
+
+/*number buttons*/
+.btn-num {
+    background-color:#3F90C9;
+    font-size: 40px;
+    font-weight: bold;
+}
+.btn-num:hover {
+    background-color: #4daef4;
+}
+.btn-num:active {
+    background-color: #2a668a
+}
+
+/*operator buttons*/
+.btn-operator, #btn-clear, #btn-equals {
+    background-color:#555;
+}
+.btn-operator:hover, #btn-clear:hover, #btn-equals:hover {
+    background-color: #737373;
+}
+.btn-operator:active, #btn-clear:active, #btn-equals:active {
+    background-color: #363636;
+}
+
+.operator-selected {
+    background-color:#999!important;
+}
+
+/*clear button*/
+#btn-clear {
+
+}
+
