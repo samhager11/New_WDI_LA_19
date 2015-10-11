@@ -86,14 +86,13 @@ To be announced soon!
 | Lilly Ghassemieh   | lillygh@gmail.com            | @lillygh        | [lillygh](https://github.com/lillygh) |
 | Nick Hendren       | nhendren7@gmail.com          | @nickhendren    | [nickhendren](https://github.com/nickhendren) |
 | Rich Donnellan     | rich.donnellan@gmail.com     | @rich.donnellan | [RichDonnellan](https://github.com/RichDonnellan) |
-| Sam Richardson     | samrichardson01@hotmail.com  | @samrich93      | [samrich93](https://github.com/samrich93) |
+| Sam Richardson     | samrichardson01@hotmail.com  | @samrich93      | [sam-cam](https://github.com/sam-cam) |
 | Sam Hager          | sam.hager11@gmail.com        | @samhager11     | [shager11](https://github.com/shager11) |
 | Santiago Casar     | santiago@nowhereprod.com     | @santiagon      | [sanjarito](https://github.com/sanjarito) |
 | Sean Hall          | seanhall22@gmail.com         | @seanh          | [SeanH22](https://github.com/SeanH22) |
 | Sean Esteva        | seangeleno@gmail.com         | @seangeleno     | [seangeleno](https://github.com/seangeleno) |
 | Seri Orfali        | seriorfali@gmail.com         | @seriorfali     | [seriorfali](https://github.com/seriorfali) |
 | Stefanie Koenig    | stefanie.l.koenig@gmail.com  | @skoenig        | [stefkoenig](https://github.com/stefkoenig) |
-| Theda Tech         | fridaylemons@gmail.com       | @thedalicioustechopich | [ThedaLicious](https://github.com/ThedaLicious) |
 | Ted Shumway        | shumway.ted@gmail.com        | @tedshumway     | [teddy310](https://github.com/teddy310) |
 | Veronica Sykes     | vasykes@gmail.com            | @veronicasykes  | [veronicasykes](https://github.com/veronicasykes) |
 
