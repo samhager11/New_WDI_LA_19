@@ -1,0 +1,50 @@
+
+.container{
+  text-align: center;
+}
+
+.box {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border: black 2px solid;
+  display: inline-block;
+}
+
+h1{
+  font-style: italic;
+}
+
+#cross{
+  width: 100px;
+}
+
+#doughnut{
+  width: 100px;
+}
+
+.cross{
+    display: inline-block;
+}
+
+.cross img {
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+}
+
+.nought{
+  display: inline-block;
+}
+
+.nought img {
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+}
+
+#button{
+  margin-top: 25px;
+  font-size: 20px;
+}
+

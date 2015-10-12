@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<!-- # CALCULATOR LAB
+Your challenge is quite simple… build a calculator using HTML, CSS AND JavaScript. This is an opportunity to get more comfortable with JavaScript ***AND*** HTML/CSS. If you feel more comfortable with JS, then use this opportunity to improve your HTML/CSS (and vice versa).
+See the visual examples:
+
+### Basic Challenge Requirements
+- Have a fully functional calculator that can ***ADD***, ***SUBTRACT***, ***DIVIDE***, and ***MULTIPLY***
+- Implement a “Clear” button/function that clears the current
+- An operator should not be allowed to be the first character in your equation
+- Don’t allow the user to enter two operators (e.g. +,=,*,/) back to back
+
+### Challenge Add-ons
+- Don’t use the eval() function in your code
+- Create buttons/functions that implement features found in scientific calculators (e.g., ***log***, ***sin***, ***sqrt***, ***exponentials***, etc. 
+
+7 8 9 div backspace
+4 5 6 mul clear
+1 2 3  -  enter
+0 . big-add rest of enter
+
+-->
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="">
+	<title>Calculator</title>
+	<style>
+* {
+	border: 1px blue ;
+  }
+.container {
+	width: 430px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 36px;
+  position: relative;
+}
+#display {
+	width: 400px;
+	height: 60px;
+	border: black 2px solid;
+	text-align: center;
+    margin: 0 auto;
+    font-size: 36px;
+}
+.sm_square {
+	background-color: #6FE695; 
+	width: 80px; 
+	height: 80px; 
+	border: black 2px solid;
+	float: left;
+}
+
+#b_decimal  {
+  background-color: #6FE695; 
+	width: 160px; 
+	height: 80px; 
+	border: black 2px solid;
+	float: left;
+}
+#b_add {
+  background-color: #41BDA6; 
+	width: 168px; 
+	height: 80px; 
+	border: black 2px solid;
+	float: left;
+}
+#b_minus {
+background-color: #41BDA6; 
+}
+
+#b_mul {
+background-color: #41BDA6; 
+}
+#b_div {
+  background-color: #41BDA6; 
+}
+
+#b_clear {
+  background-color: #3B8EBF;
+}
+#b_equal {
+  background-color: #56D39B;
+}
+#b_backspace {
+  background-color: #56D39B;
+}
+#bottom_row {
+	/*position: absolute; /* or use clear float 
+	top: 315; <neither worked so just lowered the = button to same size as the rest 
+	clear:	left;
+	overflow: auto; */
+}
+	</style>
+</head>
+<body>
+<div class="container">
+  <div class="display_wrapper">
+    <div id="display"></div>
+  </div>
+  <div class="button_wrapper">
+    <div class='sm_square' id='b7'>7</div>
+    <div class='sm_square' id='b8'>8</div>
+    <div class='sm_square' id='b9'>9</div>
+    <div class='sm_square' id='b_div'>div</div>
+    <div class='sm_square' id='b_backspace'><-</div>
+    <br>
+    <div class='sm_square' id='b4'>4</div>
+    <div class='sm_square' id='b5'>5</div>
+    <div class='sm_square' id='b6'>6</div>
+    <div class='sm_square' id='b_mul'>mul</div>
+    <div class='sm_square' id='b_clear'>clear</div>
+    <br>
+    <div class='sm_square' id='b1'>1</div>
+    <div class='sm_square' id='b2'>2</div>
+    <div class='sm_square' id='b3'>3</div>
+    <div class='sm_square' id='b_minus'>-</div>
+    <div class='sm_square' id='b_equal'>=</div>
+    <div id="bottom_row">
+      <div class='sm_square' id='b0'>0</div>
+      <div class='sm_square' id='b_decimal'>.</div>
+      <div class='sm_square' id='b_add'>+</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"> // put in src="calulator.js"
+  var entered_num = [];
+  var selected_operator;
+  var operator_hit = false; //TBD implement use of these 2 flags
+  var decimal_hit = false;
+  
+
+  var boxes = document.querySelectorAll('.sm_square');
+  for (var i=0; i<18; i++) {
+  boxes[i].addEventListener(('click'), function(){
+      //console.log("Box " + this.id + " clicked!");
+      var displ = document.querySelector("#display");
+      function gen_result(){
+      	var result;
+        var num1 = entered_num.join('');
+        console.log("num1 = " + num1);
+        result = eval(num1);
+        displ.innerText = result; 
+        return result;
+     }
+
+      function operate(op) {
+      	if (!operator_hit) {
+          entered_num.push(op);
+          displ.innerText = entered_num.join(''); 
+      	  operator_hit = true;
+          //var res = gen_result();
+          decimal_hit = false;
+        }
+      }
+
+      function clear_displ() {
+        operator_hit = false;
+        decimal_hit = false;
+        
+        //selected_operator = null;
+        var displ = document.querySelector("#display");
+        displ.innerText = ''; 
+      }
+      
+      // Store numbers / toggle storing fraction if decimal pressed
+      switch (this.id) {
+      case 'b1':
+      case 'b2':
+      case 'b3':
+      case 'b4':
+      case 'b5':
+      case 'b6':
+      case 'b7':
+      case 'b8':
+      case 'b9':
+      case 'b0':
+        operator_hit = false;
+        var box_idx = this.id;
+        var tmp = box_idx.split('');
+        entered_num.push(tmp[1]);
+        displ.innerText = entered_num.join(''); 
+        break;
+
+      case 'b_decimal': // (optinoal)
+        if (!decimal_hit) {
+          decimal_hit = true;
+          var displ = document.querySelector("#display");
+          entered_num.push('.');
+          displ.innerText = entered_num.join(''); 
+        }
+        break;
+
+      case 'b_div':
+       operate('/');
+        break;
+      case 'b_mul': 
+        operate('*');
+        break;
+      case 'b_minus':
+        operate('-');
+        break;
+      case 'b_add':
+        operate('+');
+        break;
+
+      // If equal do calculation
+      case 'b_equal':
+        operator_hit = false;
+        clear_displ();
+        gen_result();
+        entered_num = [];
+        break;
+
+      // If backspace unstore number (optional)
+      case 'b_backspace':
+        //operator_hit = false;
+        var displ = document.querySelector("#display");
+        deleted_entry = entered_num.pop();
+        if (deleted_entry === '.') {
+          decimal_hit = false;
+        }
+        displ.innerText = entered_num.join(''); 
+        break;
+
+      // If clear erase numbers/operator
+      case 'b_clear':
+        clear_displ();
+        entered_num = [];
+        break;
+      }  
+    }); 
+  }
+  </script>
+</body>
+</html>

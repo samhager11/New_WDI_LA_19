@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style media="screen">
+      .my-box {
+        border: black 2px solid;
+        width: 100px;
+        height: 100px;
+        vertical-align: top;
+        display: inline-block;
+        margin: 2px auto;
+      }
+      .xwin {
+        display: block;
+      }
+      .owin {
+        display: block;
+      }
+    </style>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div id="box 0" class="my-box"></div>
+    <div id="box 1" class="my-box"></div>
+    <div id="box 2" class="my-box"></div></br>
+    <div id="box 3" class="my-box"></div>
+    <div id="box 4" class="my-box"></div>
+    <div id="box 5" class="my-box"></div></br>
+    <div id="box 6" class="my-box"></div>
+    <div id="box 7" class="my-box"></div>
+    <div id="box 8" class="my-box"></div>
+    <button id="button" onclick=clearBoard() class="win" style="display: block">Clear Board</button>
+
+    <div id="xwin">X Wins: 0</div>
+    <div id="owin">O Wins: 0</div>
+
+    <!-- <p id="demo"></p>
+
+    <script>
+    var carName = "Volvo";
+    document.getElementById("xwin").innerHTML = "X Wins: " + xWins;
+    </script> -->
+
+    <script type="text/javascript">
+      var playerX = true;
+      var playerO = false;
+      var counter = 0;
+      var xWins = 0;
+      var oWins = 0;
+      var x = document.getElementById('x');
+      var boxes = document.querySelectorAll(".my-box");
+      // console.log(boxes[4]);
+      for(var i=0; i < boxes.length; i++){
+        boxes[i].addEventListener('click', function(){
+          console.log(this);
+          if (playerX === true && this.className === "my-box"){
+            this.innerHTML = '<img src=\"x.png\" style=\"width: 100px\" />';
+            this.classList.add('x');
+            if (boxes[0].className === "my-box x" && boxes[1].className === "my-box x" && boxes[2].className === "my-box x" ||
+                boxes[0].className === "my-box x" && boxes[4].className === "my-box x" && boxes[8].className === "my-box x" ||
+                boxes[0].className === "my-box x" && boxes[3].className === "my-box x" && boxes[6].className === "my-box x" ||
+                boxes[3].className === "my-box x" && boxes[4].className === "my-box x" && boxes[5].className === "my-box x" ||
+                boxes[6].className === "my-box x" && boxes[7].className === "my-box x" && boxes[8].className === "my-box x" ||
+                boxes[1].className === "my-box x" && boxes[4].className === "my-box x" && boxes[7].className === "my-box x" ||
+                boxes[2].className === "my-box x" && boxes[5].className === "my-box x" && boxes[8].className === "my-box x" ||
+                boxes[2].className === "my-box x" && boxes[4].className === "my-box x" && boxes[6].className === "my-box x"){
+              console.log("X Wins");
+
+              xWins += 1;
+              document.getElementById("xwin").innerHTML = 'X Wins: ' + xWins;
+              alert("X Wins!");
+              clearBoard();
+            }
+
+            return playerX = false;
+          } else if (playerX === false && this.className === "my-box"){
+            this.innerHTML = '<img src=\"o.png\" style=\"width: 90px; height: 90px; margin-left: 5px; margin-top: 5px;\" />';
+            this.classList.add('o');
+            if (boxes[0].className === "my-box o" && boxes[1].className === "my-box o" && boxes[2].className === "my-box o" ||
+                boxes[0].className === "my-box o" && boxes[4].className === "my-box o" && boxes[8].className === "my-box o" ||
+                boxes[0].className === "my-box o" && boxes[3].className === "my-box o" && boxes[6].className === "my-box o" ||
+                boxes[3].className === "my-box o" && boxes[4].className === "my-box o" && boxes[5].className === "my-box o" ||
+                boxes[6].className === "my-box o" && boxes[7].className === "my-box o" && boxes[8].className === "my-box o" ||
+                boxes[1].className === "my-box o" && boxes[4].className === "my-box o" && boxes[7].className === "my-box o" ||
+                boxes[2].className === "my-box o" && boxes[5].className === "my-box o" && boxes[8].className === "my-box o" ||
+                boxes[2].className === "my-box o" && boxes[4].className === "my-box o" && boxes[6].className === "my-box o"){
+              console.log("O Wins");
+              oWins += 1;
+              document.getElementById("owin").innerHTML = 'O Wins: ' + oWins;
+              alert("O Wins!");
+              clearBoard();
+            }
+            return playerX = true;
+          }
+        });
+      }
+
+      function clearBoard(){
+        if (counter < 10){
+          for (i=0; i < boxes.length; i++){
+            boxes[i].innerHTML = null;
+            boxes[i].className = "my-box";
+            playerX = true;
+            counter = 0;
+          }
+          // document.location.href = '';
+          // counter = counter + 1;
+        }
+        console.log('win');
+      }
+
+    </script>
+  </body>
+  <img id="x" src="x.png" style="width: 100px; visibility:hidden" />
+  <img id="o" src="o.png" style="width: 80px; height:80px; visibility:hidden" />
+</html>

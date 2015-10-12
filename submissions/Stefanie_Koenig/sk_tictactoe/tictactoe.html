@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="style2.css">
+  </head>
+  <body>
+    <div class = "container">
+        <h1>Let's Play Tic Tac Toe</h1>
+        <div class="row1">
+              <div class="box" id= "r1c1"></div>
+              <div class="box" id= "r1c2"></div>
+              <div class="box" id= "r1c3"></div>
+        </div>
+        <div class="row2">
+              <div class="box" id= "r2c1"></div>
+              <div class="box" id= "r2c2"></div>
+              <div class="box" id= "r2c3"></div>
+        </div>
+        <div class="row3">
+              <div class="box" id= "r3c1"></div>
+              <div class="box" id= "r3c2"></div>
+              <div class="box" id= "r3c1"></div>
+        </div>
+
+    <button id="button" onclick=clearBoard()>Clear the Board</button>
+</div>
+
+    <script type="text/javascript">
+      var counter = 0;
+      var boxes = document.querySelectorAll('.box');
+
+      function setSquare(el){
+        el.addEventListener('click', function(){
+        if (el.className === "box") {
+          if (counter % 2 === 0) {
+            el.className = "cross";
+            el.innerHTML = '<img src="http://graphics8.nytimes.com/images/2012/11/24/crosswords/joy-of-x-x/joy-of-x-x-blog480.jpg">';
+            getWinner();
+          } else {
+            el.className = "nought";
+            el.innerHTML = '<img src="http://t02.deviantart.net/aXZKHykIf1lkVzwaEmrC3h7HBNg=/300x200/filters:fixed_height(100,100):origin()/pre00/1720/th/pre/i/2004/104/8/7/the_solitary_fruit_loop.jpg">';
+            getWinner();
+          }
+          counter = counter + 1;
+      }})
+      }
+
+      for (var i = 0; i < boxes.length; i++) {
+          setSquare(boxes[i])
+      }
+
+    function getWinner(){
+            if(
+                boxes[0].className==="cross" && boxes[1].className==="cross" && boxes[2].className==="cross"||
+                boxes[3].className==="cross" && boxes[4].className==="cross" && boxes[5].className==="cross"||
+                boxes[6].className==="cross" && boxes[7].className==="cross" && boxes[8].className==="cross"||
+                boxes[0].className==="cross" && boxes[3].className==="cross" && boxes[6].className==="cross"||
+                boxes[1].className==="cross" && boxes[4].className==="cross" && boxes[7].className==="cross"||
+                boxes[2].className==="cross" && boxes[5].className==="cross" && boxes[8].className==="cross"||
+                boxes[0].className==="cross" && boxes[4].className==="cross" && boxes[8].className==="cross"||
+                boxes[2].className==="cross" && boxes[4].className==="cross" && boxes[6].className==="cross"
+            )
+                {
+                        alert("X Wins!!!");
+                        clearBoard();
+                }
+                else if(
+                boxes[0].className==="nought" && boxes[1].className==="nought" && boxes[2].className==="nought"||
+                boxes[3].className==="nought" && boxes[4].className==="nought" && boxes[5].className==="nought"||
+                boxes[6].className==="nought" && boxes[7].className==="nought" && boxes[8].className==="nought"||
+                boxes[0].className==="nought" && boxes[3].className==="nought" && boxes[6].className==="nought"||
+                boxes[1].className==="nought" && boxes[4].className==="nought" && boxes[7].className==="nought"||
+                boxes[2].className==="nought" && boxes[5].className==="nought" && boxes[8].className==="nought"||
+                boxes[0].className==="nought" && boxes[4].className==="nought" && boxes[8].className==="nought"||
+                boxes[2].className==="nought" && boxes[4].className==="nought" && boxes[6].className==="nought"
+            )
+                {
+                        alert("O Wins!!!");
+                        clearBoard();
+                }
+
+            }
+
+
+
+        function clearBoard() {
+             if (counter < 10){
+                   document.location.href = '';
+            counter = counter + 1;
+             }
+          }
+      </script>
+  </body>
+</html>
