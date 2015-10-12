@@ -3,8 +3,48 @@
   <head>
     <meta charset="utf-8">
     <title>jCrack</title>
+    <link rel='stylesheet' href='styles.css'>
   </head>
   <body>
+    <div id='screen'>
+
+      <div class='categories'>
+
+        <select>
+          <option id='1' value="volvo">Volvo</option>
+          <option id='2' value="saab">Saab</option>
+          <option id='3' value="mercedes">Mercedes</option>
+        </select>
+        <br>
+        <button id="spinner">Spin Category!</button>
+      </div>
+
+      <div class='body'>
+
+        <div class='questions'>
+          <div class='question-frame'>
+            <button id='get-question'>Get Question</button>
+          </div>
+        </div>
+
+        <div class='answers'>
+          <div class='answer-frame'>
+          </div>
+        </div>
+
+        <div class='scoreboard'>
+          <div class='player' id='player1'>
+          </div>
+          <div class='player' id='player2'>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 
   </body>
 </html>

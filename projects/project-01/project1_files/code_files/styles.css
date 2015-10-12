@@ -1,0 +1,78 @@
+/*Style Sheet for project 1*/
+
+/*////Entire page styles////*/
+
+* {
+  border: 1px dashed black;
+  margin: 0 auto;
+}
+
+#screen {
+  width: 800px;
+  height: 700px;
+  text-align: center;
+  background-color: teal;
+}
+
+/*///Div containers in body of screen///*/
+
+.categories{
+  width: 600px;
+  height:125px;
+  background-color: blanchedalmond;
+}
+
+.body{
+  width:800px;
+  height: 575px;
+}
+
+.questions{
+  width: 600px;
+  height: 275px;
+  background-color: blanchedalmond;
+}
+
+.answers {
+  width: 600px;
+  height: 200px;
+  background-color: blanchedalmond;
+}
+
+.scoreboard {
+  width: 600px;
+  height: 90px;
+  background-color: blanchedalmond;
+  margin: 0 auto;
+}
+
+/*///Div containers for frames in each body section///*/
+
+.question-frame{
+  margin: 0 auto;
+  margin-top: 25px;
+  width: 500px;
+  height: 225px;
+  background-color: white;
+}
+
+#get-question{
+
+}
+
+.answer-frame{
+  height: 150px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 25px;
+  background-color: white;
+}
+
+.player{
+  height: 50px;
+  width: 225px;
+  margin: 20px 5px 0px 5px;
+  display: inline-block;
+  background-color: white;
+
+}
