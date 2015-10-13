@@ -40,9 +40,15 @@ var $playerBoxes = $('.player');
 var $player1 = $('#player1');
 var $player2 = $('#player2');
 var $scoreBoxes = $('.score');
-var $player1Score = $('#score1');
-var $player2Score = $('#score2');
 
+var player1Score = 0;
+var $player1ScoreBox = $('#score1');
+
+var player2Score = 0;
+var $player2ScoreBox = $('#score2');
+
+var activePlayer;
+var playerCounter = 0;
 
 var categoryArray;
 var activeCategory;
@@ -54,6 +60,8 @@ var activeFalseAnswers;
 var category1;
 var category2;
 var category3;
+
+
 //Define additional categories when more needed
 
 // Set up Category and Question + Answer Constructor object
@@ -121,15 +129,50 @@ $('#spinner').on('click', function(){
   // console.log(activeCategory);
 activeCategory = categoryArray[Math.floor(Math.random()*3)]
 var spinCategory = activeCategory.catName
-
-$('.option' ).text(spinCategory);
+$('.option' ).html(spinCategory);
 
 activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
-setTimeout(function(){$questionBox.text(activeQuestion.question)},1000)
+setTimeout(function(){$questionBox.html(activeQuestion.question)},1000);
 
 activeAnswer = activeQuestion.answer;
-setTimeout(function(){$rightAnswer.text(activeAnswer)},1000);
+setTimeout(function(){$rightAnswer.html(activeAnswer)},1000);
 
-activeFalseAnswers = activeQuestion.falseAnswers
+activeFalseAnswers = activeQuestion.falseAnswers;
+setTimeout(function(){for (var i = 0; i < $wrongAnswers.length; i++) {
+  $wrongAnswers[i].innerHTML = activeFalseAnswers[i];
+}},1000);
+
+rewardPoints();
+playerCounter++;
 
 })
+
+
+
+function rewardPoints(){
+if(playerCounter%2===0){
+$('.answer.rightAnswer').on('click',function(){
+  console.log('right answer working');
+  player1Score+=10;
+  $player1ScoreBox.text(player1Score);
+})
+
+$('.answer.wrongAnswer').on('click',function(){
+  console.log('wrong answer working');
+  player1Score-=5;
+  $player1ScoreBox.text(player1Score);
+})
+} else if (playerCounter%2!==0){
+  $('.answer.rightAnswer').on('click',function(){
+    console.log('right answer working');
+    player2Score+=10;
+    $player2ScoreBox.text(player2Score);
+  })
+
+  $('.answer.wrongAnswer').on('click',function(){
+    console.log('wrong answer working');
+    player2Score-=5;
+    $player2ScoreBox.text(player2Score);
+  })
+}
+}
