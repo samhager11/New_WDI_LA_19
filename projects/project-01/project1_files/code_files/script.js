@@ -14,6 +14,21 @@ var getItQuestion2 = ['Which jQuery method removes a specified attribute and its
 
 var getItQuestion3 = ['Which jQuery method adds a new value to the existing value of the class attribute?','.addClass()',['.class()','.val()','.classVal()']];
 
+//Event Listener Category questions - not completed
+var eventQuestion1 = ['Test question 1?','answer Q1',['falseAnswer1 Q1','falseAnswer2 Q1','falseAnswer3 Q1']];
+
+var eventQuestion2 = ['Test question 2?','answer Q2',['falseAnswer1 Q2','falseAnswer2 Q2','falseAnswer3 Q2']];
+
+var eventQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAnswer2 Q3','falseAnswer3 Q3']];
+
+//Finding Elements Category questions - not completed
+var findQuestion1 = ['Test question 1?','answer Q1',['falseAnswer1 Q1','falseAnswer2 Q1','falseAnswer3 Q1']];
+
+var findQuestion2 = ['Test question 2?','answer Q2',['falseAnswer1 Q2','falseAnswer2 Q2','falseAnswer3 Q2']];
+
+var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAnswer2 Q3','falseAnswer3 Q3']];
+
+
 
 // Define Global Variables ///////////////////////
 
@@ -31,6 +46,7 @@ var $player2Score = $('#score2');
 var category1;
 var category2;
 var category3;
+//Define additional categories when more needed
 
 // Set up Category and Question + Answer Constructor object
 
@@ -59,30 +75,40 @@ var Category = function(nameIt,q1,q2,q3){
 //Creates new Category objects with Questions and Answers//
 
 function createCategories(){
- category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
- console.log(category1);
 
- // var Events = new Category('Events',)
+ category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
+
+ category2 = new Category('Event Listeners',eventQuestion1,eventQuestion2,eventQuestion3);
+
+ category3 = new Category('Find Elements',findQuestion1,findQuestion2,findQuestion3);
+
 }
+
+//created variable to hold active Category
+
 
 function setCategories(){
   $(".option").each(function(){
     var idNum = this.value;
-    console.log(idNum);
     var categoryNum = 'category'+idNum;
     var categoryToPass = window[categoryNum].catName;
-    console.log(categoryToPass);
     $(this).text(function(){
       return categoryToPass;
     })
   })
-  console.log("setCategories running")
 }
 
-function inputQuestion(){
-  $questionBox.html(getQuestion);
-}
 
-function getQuestion(){
 
-}
+$('#get-question').on('click', function(){
+  var activeCategory = $('.option:first').text();
+
+  $questionBox.html(function(){
+
+    if(category1.catName===activeCategory){
+      return category1.Question1.question;
+    } else {
+      return 'if statement not working';
+    }
+  })
+});
