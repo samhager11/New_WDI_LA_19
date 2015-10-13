@@ -95,3 +95,8 @@
   background-color: grey;
   float: right;
 }
+
+.reset{
+  height: 50px;
+  width: 100px;
+}

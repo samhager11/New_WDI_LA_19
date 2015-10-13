@@ -33,6 +33,7 @@ var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAns
 
 var $spinner = $('#spinner');
 var $questionBox = $('.question-frame');
+var $resetButton = $('.reset');
 // var $answerBox = $('.answer-frame');
 
 var $scoreBoard = $('.scoreboard');
@@ -43,23 +44,25 @@ var $scoreBoxes = $('.score');
 
 var player1Score = 0;
 var $player1ScoreBox = $('#score1');
-
 var player2Score = 0;
 var $player2ScoreBox = $('#score2');
 
 var activePlayer;
 var playerCounter = 0;
 
-var categoryArray;
+var categoryArray=[];
 var activeCategory;
 var activeQuestion;
 var activeAnswer;
+
+var $allAnswers = $('.answer');
 var $rightAnswer = $('.answer.rightAnswer');
 var $wrongAnswers = $('.answer.wrongAnswer')
 var activeFalseAnswers;
-var category1;
-var category2;
-var category3;
+
+// var category1;
+// var category2;
+// var category3;
 
 
 //Define additional categories when more needed
@@ -99,80 +102,97 @@ var Category = function(nameIt,q1,q2,q3){
   }
 
 
-//Creates new Category objects with Questions and Answers//
+//Creates new Category objects with Questions and Answers from Category object constructor found above on lines 74 through 86 ////////
 
+ getItCategory = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
 
+ eventCategory = new Category('Welcome to the Big Event',eventQuestion1,eventQuestion2,eventQuestion3);
 
-categoryArray=[
- category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3),
- category2 = new Category('Welcome to the Big Event',eventQuestion1,eventQuestion2,eventQuestion3),
- category3 = new Category('Element Search Party',findQuestion1,findQuestion2,findQuestion3)]
+ searchCategory = new Category('Element Search Party',findQuestion1,findQuestion2,findQuestion3);
 
+categoryArray.push(getItCategory,eventCategory,searchCategory);
 
-
-
-//Function that sets category names based on categories - what needs to be created is a function that allows for new categories to be added.
-  // $(".option").each(function(){
-  //   var idNum = this.value;
-  //   var categoryNum = 'category'+idNum;
-  //   var categoryToPass = window[categoryNum].catName;
-  //   $(this).text(function(){
-  //     return categoryToPass;
-  //   })
-  // })
-
-
+///////////////////////////////////////////////////////////////////
 
 
 $('#spinner').on('click', function(){
-  // var activeCategory = $('.option active').text();
-  // console.log(activeCategory);
+
+$resetButton.fadeOut();
+
 activeCategory = categoryArray[Math.floor(Math.random()*3)]
 var spinCategory = activeCategory.catName
 $('.option' ).html(spinCategory);
+$('#spinner').fadeOut();
 
 activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
 setTimeout(function(){$questionBox.html(activeQuestion.question)},1000);
 
 activeAnswer = activeQuestion.answer;
-setTimeout(function(){$rightAnswer.html(activeAnswer)},1000);
+setTimeout(function(){$rightAnswer.html(activeAnswer)},2000);
 
 activeFalseAnswers = activeQuestion.falseAnswers;
 setTimeout(function(){for (var i = 0; i < $wrongAnswers.length; i++) {
   $wrongAnswers[i].innerHTML = activeFalseAnswers[i];
-}},1000);
+}},2000);
 
-rewardPoints();
-playerCounter++;
+$questionBox.fadeIn();
+$allAnswers.fadeIn();
+setTimeout(rewardPoints(),0);
 
 })
 
 
 
 function rewardPoints(){
-if(playerCounter%2===0){
-$('.answer.rightAnswer').on('click',function(){
-  console.log('right answer working');
-  player1Score+=10;
-  $player1ScoreBox.text(player1Score);
-})
 
-$('.answer.wrongAnswer').on('click',function(){
-  console.log('wrong answer working');
-  player1Score-=5;
-  $player1ScoreBox.text(player1Score);
-})
-} else if (playerCounter%2!==0){
-  $('.answer.rightAnswer').on('click',function(){
-    console.log('right answer working');
-    player2Score+=10;
-    $player2ScoreBox.text(player2Score);
+if(playerCounter%2===0){
+  $rightAnswer.on('click',function(){
+    console.log('Player1 answer working');
+    player1Score+=10;
+    $player1ScoreBox.text(player1Score);
+    $wrongAnswers.fadeOut();
+    $rightAnswer.fadeOut();
+    $questionBox.fadeOut();
+    $resetButton.fadeIn();
+    playerCounter++;
   })
 
-  $('.answer.wrongAnswer').on('click',function(){
-    console.log('wrong answer working');
+  $wrongAnswers.on('click',function(){
+    console.log('Player1 wrong answer working');
+      $(this).fadeOut();
+    player1Score-=5;
+    $player1ScoreBox.text(player1Score);
+  })
+} else if (playerCounter%2!==0){
+  $rightAnswer.on('click',function(){
+    console.log('Player2 answer working');
+    player2Score+=10;
+    $player2ScoreBox.text(player2Score);
+    $wrongAnswers.fadeOut();
+    $rightAnswer.fadeOut();
+    $questionBox.fadeOut();
+    $resetButton.fadeIn();
+    playerCounter++;
+  })
+
+  $wrongAnswers.on('click',function(){
+    console.log('Player2 answer working');
+    $(this).fadeOut();
     player2Score-=5;
     $player2ScoreBox.text(player2Score);
   })
 }
 }
+
+
+
+function newQuestionReady(){
+  $('#spinner').fadeIn();
+}
+
+$('.reset').on('click',newQuestionReady);
+
+// function createNewCategory(categoryName,questionString,answerString,wrongAnswerArray){
+//   categoryName
+//   categoryArray.push( = new Category()
+// }
