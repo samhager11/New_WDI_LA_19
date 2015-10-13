@@ -27,13 +27,13 @@
   height: 575px;
 }
 
-.questions{
+.questionsSection{
   width: 600px;
   height: 275px;
   background-color: blanchedalmond;
 }
 
-.answers {
+.answersSection {
   width: 600px;
   height: 200px;
   background-color: blanchedalmond;
@@ -48,6 +48,13 @@
 
 /*///Div containers for frames in each body section///*/
 
+/*///Category selector///*/
+.option{
+  text-align: center;
+  padding: 10px;
+}
+
+/*////Question frame////*/
 .question-frame{
   margin: 0 auto;
   margin-top: 25px;
@@ -56,10 +63,8 @@
   background-color: white;
 }
 
-#get-question{
-  float:left;
-}
 
+/*////Answer frame////*/
 .answer-frame{
   height: 150px;
   width: 500px;
@@ -68,13 +73,20 @@
   background-color: white;
 }
 
+.answer{
+  height: 25px;
+  width: 125px;
+  border-radius: 10px;
+  margin: 5px 10px 10px 10px;
+}
+
+/*////Scoreboard////*/
 .player{
   height: 50px;
   width: 225px;
   margin: 20px 5px 0px 5px;
   display: inline-block;
   background-color: white;
-
 }
 
 .score{
@@ -82,5 +94,4 @@
   width: 65px;
   background-color: grey;
   float: right;
-
 }

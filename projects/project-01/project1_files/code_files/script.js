@@ -1,7 +1,6 @@
 $(document).ready(function (){
   console.log('jQuery is running')
-  createCategories();
-  setCategories();
+  // createCategories();
 
 })
 
@@ -34,7 +33,8 @@ var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAns
 
 var $spinner = $('#spinner');
 var $questionBox = $('.question-frame');
-var $answerBox = $('.answer-frame');
+// var $answerBox = $('.answer-frame');
+
 var $scoreBoard = $('.scoreboard');
 var $playerBoxes = $('.player');
 var $player1 = $('#player1');
@@ -43,6 +43,14 @@ var $scoreBoxes = $('.score');
 var $player1Score = $('#score1');
 var $player2Score = $('#score2');
 
+
+var categoryArray;
+var activeCategory;
+var activeQuestion;
+var activeAnswer;
+var $rightAnswer = $('.answer.rightAnswer');
+var $wrongAnswers = $('.answer.wrongAnswer')
+var activeFalseAnswers;
 var category1;
 var category2;
 var category3;
@@ -54,61 +62,74 @@ var category3;
 
 var Category = function(nameIt,q1,q2,q3){
   this.catName = nameIt;
-  this.Question1 = {
+  this.Questions = [{
       question: q1[0],
       answer: q1[1],
       falseAnswers: q1[2],
-    }
-  this.Question2 = {
-      question: q2[0],
-      answer: q2[1],
-      falseAnswers: q2[2],
-    }
-  this.Question3 = {
-      question: q3[0],
-      answer: q3[1],
-      falseAnswers: q3[2],
-    }
+    },{question: q2[0],
+        answer: q2[1],
+        falseAnswers: q2[2],
+    },{question: q3[0],
+        answer: q3[1],
+        falseAnswers: q3[2],
+    }]
+  // this.Question1 = {
+  //     question: q1[0],
+  //     answer: q1[1],
+  //     falseAnswers: q1[2],
+  //   }
+  // this.Question2 = {
+  //     question: q2[0],
+  //     answer: q2[1],
+  //     falseAnswers: q2[2],
+  //   }
+  // this.Question3 = {
+  //     question: q3[0],
+  //     answer: q3[1],
+  //     falseAnswers: q3[2],
+  //   }
   }
 
 
 //Creates new Category objects with Questions and Answers//
 
-function createCategories(){
-
- category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
-
- category2 = new Category('Event Listeners',eventQuestion1,eventQuestion2,eventQuestion3);
-
- category3 = new Category('Find Elements',findQuestion1,findQuestion2,findQuestion3);
-
-}
-
-//created variable to hold active Category
 
 
-function setCategories(){
-  $(".option").each(function(){
-    var idNum = this.value;
-    var categoryNum = 'category'+idNum;
-    var categoryToPass = window[categoryNum].catName;
-    $(this).text(function(){
-      return categoryToPass;
-    })
-  })
-}
+categoryArray=[
+ category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3),
+ category2 = new Category('Welcome to the Big Event',eventQuestion1,eventQuestion2,eventQuestion3),
+ category3 = new Category('Element Search Party',findQuestion1,findQuestion2,findQuestion3)]
 
 
 
-$('#get-question').on('click', function(){
-  var activeCategory = $('.option:first').text();
 
-  $questionBox.html(function(){
+//Function that sets category names based on categories - what needs to be created is a function that allows for new categories to be added.
+  // $(".option").each(function(){
+  //   var idNum = this.value;
+  //   var categoryNum = 'category'+idNum;
+  //   var categoryToPass = window[categoryNum].catName;
+  //   $(this).text(function(){
+  //     return categoryToPass;
+  //   })
+  // })
 
-    if(category1.catName===activeCategory){
-      return category1.Question1.question;
-    } else {
-      return 'if statement not working';
-    }
-  })
-});
+
+
+
+$('#spinner').on('click', function(){
+  // var activeCategory = $('.option active').text();
+  // console.log(activeCategory);
+activeCategory = categoryArray[Math.floor(Math.random()*3)]
+var spinCategory = activeCategory.catName
+
+$('.option' ).text(spinCategory);
+
+activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
+setTimeout(function(){$questionBox.text(activeQuestion.question)},1000)
+
+activeAnswer = activeQuestion.answer;
+setTimeout(function(){$rightAnswer.text(activeAnswer)},1000);
+
+activeFalseAnswers = activeQuestion.falseAnswers
+
+})
