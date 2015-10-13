@@ -1,6 +1,7 @@
 $(document).ready(function (){
   console.log('jQuery is running')
   // createCategories();
+  rewardPoints();
 
 })
 
@@ -84,21 +85,6 @@ var Category = function(nameIt,q1,q2,q3){
         answer: q3[1],
         falseAnswers: q3[2],
     }]
-  // this.Question1 = {
-  //     question: q1[0],
-  //     answer: q1[1],
-  //     falseAnswers: q1[2],
-  //   }
-  // this.Question2 = {
-  //     question: q2[0],
-  //     answer: q2[1],
-  //     falseAnswers: q2[2],
-  //   }
-  // this.Question3 = {
-  //     question: q3[0],
-  //     answer: q3[1],
-  //     falseAnswers: q3[2],
-  //   }
   }
 
 
@@ -117,80 +103,80 @@ categoryArray.push(getItCategory,eventCategory,searchCategory);
 
 $('#spinner').on('click', function(){
 
-$resetButton.fadeOut();
+  $resetButton.fadeOut();
 
-activeCategory = categoryArray[Math.floor(Math.random()*3)]
-var spinCategory = activeCategory.catName
-$('.option' ).html(spinCategory);
-$('#spinner').fadeOut();
+  activeCategory = categoryArray[Math.floor(Math.random()*3)]
+  var spinCategory = activeCategory.catName
+  $('.option' ).html(spinCategory);
+  $('#spinner').fadeOut();
 
-activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
-setTimeout(function(){$questionBox.html(activeQuestion.question)},1000);
+  activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
+  setTimeout(function(){$questionBox.html(activeQuestion.question)},1000);
 
-activeAnswer = activeQuestion.answer;
-setTimeout(function(){$rightAnswer.html(activeAnswer)},2000);
+  activeAnswer = activeQuestion.answer;
+  setTimeout(function(){$rightAnswer.html(activeAnswer)},2000);
 
-activeFalseAnswers = activeQuestion.falseAnswers;
-setTimeout(function(){for (var i = 0; i < $wrongAnswers.length; i++) {
-  $wrongAnswers[i].innerHTML = activeFalseAnswers[i];
-}},2000);
+  activeFalseAnswers = activeQuestion.falseAnswers;
+  setTimeout(function(){for (var i = 0; i < $wrongAnswers.length; i++) {
+    $wrongAnswers[i].innerHTML = activeFalseAnswers[i];
+  }},2000);
 
-$questionBox.fadeIn();
-$allAnswers.fadeIn();
-setTimeout(rewardPoints(),0);
+  $questionBox.fadeIn();
+  $allAnswers.fadeIn();
+  //setTimeout(rewardPoints(),0);
+  //rewardPoints()
 
 })
 
 
-
 function rewardPoints(){
-
-if(playerCounter%2===0){
   $rightAnswer.on('click',function(){
-    console.log('Player1 answer working');
-    player1Score+=10;
-    $player1ScoreBox.text(player1Score);
-    $wrongAnswers.fadeOut();
-    $rightAnswer.fadeOut();
-    $questionBox.fadeOut();
-    $resetButton.fadeIn();
-    playerCounter++;
+    if(playerCounter%2===0){
+      console.log('Player1 answer working');
+      player1Score+=10;
+      $player1ScoreBox.text(player1Score);
+      fadeOnRightAnswer();
+      playerCounter++;
+    } else {
+        console.log('Player2 answer working');
+        player2Score+=10;
+        $player2ScoreBox.text(player2Score);
+        fadeOnRightAnswer();
+        playerCounter++;
+    }
   })
 
   $wrongAnswers.on('click',function(){
-    console.log('Player1 wrong answer working');
+    if(playerCounter%2===0){
+      console.log('Player1 wrong answer working');
+        $(this).fadeOut();
+      player1Score-=5;
+      $player1ScoreBox.text(player1Score);
+    } else{
+      console.log('Player2 wrong answer working');
       $(this).fadeOut();
-    player1Score-=5;
-    $player1ScoreBox.text(player1Score);
-  })
-} else if (playerCounter%2!==0){
-  $rightAnswer.on('click',function(){
-    console.log('Player2 answer working');
-    player2Score+=10;
-    $player2ScoreBox.text(player2Score);
-    $wrongAnswers.fadeOut();
-    $rightAnswer.fadeOut();
-    $questionBox.fadeOut();
-    $resetButton.fadeIn();
-    playerCounter++;
-  })
-
-  $wrongAnswers.on('click',function(){
-    console.log('Player2 answer working');
-    $(this).fadeOut();
-    player2Score-=5;
-    $player2ScoreBox.text(player2Score);
+      player2Score-=5;
+      $player2ScoreBox.text(player2Score);
+    }
   })
 }
+
+
+function fadeOnRightAnswer(){
+  $wrongAnswers.fadeOut();
+  $wrongAnswers.html('');
+  $rightAnswer.fadeOut();
+  $rightAnswer.html('');
+  $questionBox.fadeOut();
+  $questionBox.html('');
+  $resetButton.fadeIn();
 }
-
-
 
 function newQuestionReady(){
   $('#spinner').fadeIn();
 }
 
-$('.reset').on('click',newQuestionReady);
+$resetButton.on('click',newQuestionReady);
 
 // function createNewCategory(categoryName,questionString,answerString,wrongAnswerArray){
 //   categoryName
