@@ -76,3 +76,11 @@
   background-color: white;
 
 }
+
+.score{
+  height: 50px;
+  width: 65px;
+  background-color: grey;
+  float: right;
+
+}
