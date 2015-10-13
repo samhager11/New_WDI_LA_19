@@ -28,6 +28,9 @@ var $scoreBoxes = $('.score');
 var $player1Score = $('#score1');
 var $player2Score = $('#score2');
 
+var category1;
+var category2;
+var category3;
 
 // Set up Category and Question + Answer Constructor object
 
@@ -56,11 +59,30 @@ var Category = function(nameIt,q1,q2,q3){
 //Creates new Category objects with Questions and Answers//
 
 function createCategories(){
- var GetIt = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
- console.log(GetIt);
+ category1 = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
+ console.log(category1);
+
  // var Events = new Category('Events',)
 }
 
 function setCategories(){
+  $(".option").each(function(){
+    var idNum = this.value;
+    console.log(idNum);
+    var categoryNum = 'category'+idNum;
+    var categoryToPass = window[categoryNum].catName;
+    console.log(categoryToPass);
+    $(this).text(function(){
+      return categoryToPass;
+    })
+  })
   console.log("setCategories running")
+}
+
+function inputQuestion(){
+  $questionBox.html(getQuestion);
+}
+
+function getQuestion(){
+
 }
