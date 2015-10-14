@@ -37,14 +37,18 @@ var $spinner = $('#spinner');
 var $questionBox = $('.question-frame');
 var $questionBoxHtml = $('.question-html')
 var $resetButton = $('.reset');
+var $categorySelected = $('.categorySelected');
 // var $answerBox = $('.answer-frame');
 
-var $alertBox = $('.alertSection');
+var $alertSection = $('.alertSection');
+var $alertBox = $('.alertBox')
+
+
 var $playerBoxes = $('.player');
 var $player1 = $('#player1');
 var $player2 = $('#player2');
-var $scoreBoxes = $('.score');
 
+var $scoreBoxes = $('.score');
 var player1Score = 0;
 var $player1ScoreBox = $('#score1');
 var player2Score = 0;
@@ -64,13 +68,15 @@ var $rightAnswer = $('.answer.rightAnswer');
 var $wrongAnswers = $('.answer.wrongAnswer')
 var activeFalseAnswers;
 
+var questionAnswered = false;
 var pointsAddForCorrect=10;
 var pointsMinusForWrong= 3;
 var pointsToWin = 20;
 var scoreMeterHeight = 300;
-// var category1;
-// var category2;
-// var category3;
+
+var counterTime = 5;
+var counterResetTime = 5;
+
 
 
 //Define additional categories when more needed
@@ -95,7 +101,7 @@ var Category = function(nameIt,q1,q2,q3){
   }
 
 
-//Creates new Category objects with Questions and Answers from Category object constructor found above on lines 74 through 86 ////////
+//Creates new Category objects with Questions and Answers from Category object constructor found above on lines 74 through 86. MAX OF 3 QUESTIONS CURRENTLY BASED ON CATEGORY OBJECT CONSTRUCTOR ////////
 
  getItCategory = new Category('Get It and Set It',getItQuestion1,getItQuestion2,getItQuestion3);
 
@@ -108,37 +114,49 @@ categoryArray.push(getItCategory,eventCategory,searchCategory);
 ///////////////////////////////////////////////////////////////////
 
 function activateSpinCategory(){
-  $questionBoxHtml.html('');
-  $allAnswers.hide();
+  // $questionBoxHtml.html('');
+  // $allAnswers.hide();
 
   $spinner.on('click', function(){
-    $resetButton.fadeOut();
-    $spinner.fadeOut();
+    $resetButton.fadeOut(1000);
+    $spinner.fadeOut(1000);
 
-    activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)]
-    var spinCategory = activeCategory.catName
-    $('.option' ).html(spinCategory);
+    //Select active Category
+    activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
 
+    //set Active Category with Category Name
+    var spinCategory = activeCategory.catName;
 
+    //Display active Category Name in Category box
+    $categorySelected.hide().html(spinCategory).delay(1000).slideDown(1000);
+
+    //Select active question from the category
     activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
 
+    //Display active question in question box
+    $questionBoxHtml.hide().html(activeQuestion.question).delay(3000).fadeIn(1000);
 
-    $questionBoxHtml.html(activeQuestion.question).delay(0).fadeIn(0);
+    //Animate answer options in answer box
+    answersIntervalID = window.setInterval(animateAnswers,3000);
 
-    intervalID = window.setInterval(animateAnswers,3000);
-
+    //Select answer for active question
     activeAnswer = activeQuestion.answer;
+    //Select incorrect answers for active question
     activeFalseAnswers = activeQuestion.falseAnswers;
 
-    $rightAnswer.html(activeAnswer).delay(1000).fadeIn(1000);
+    //Display correct answer in answer options
+    $rightAnswer.hide().html(activeAnswer).delay(3000).fadeIn(1000);
 
+    //Display incorrect answers in answer options
     $wrongAnswers.each(function(index){
-      $(this).html(activeFalseAnswers[index])
-    }).delay(1000).fadeIn(1000);
+      $(this).hide().html(activeFalseAnswers[index])
+    }).delay(3000).fadeIn(1000);
 
-    // $questionBox.fadeIn();
-    // $allAnswers.fadeIn();
+    //Display countdown in alert box
+    $alertBox.hide().html('Get Ready!').delay(3000).fadeIn(1000)
 
+    //Display timer in alert box and begin countdown
+    setTimeout(countdownTimer,5000);
   })
 }
 
@@ -160,14 +178,14 @@ function setUpPointRewarding(){
       player1Score+=pointsAddForCorrect;
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
-      resetForNewQuestion();
+      questionAnswered = true;
 
     } else {
         console.log('Player2 answer working');
         player2Score+=pointsAddForCorrect;
         changePointsInMeter();
         $player2ScoreBox.fadeIn(1000).text(player2Score);
-        resetForNewQuestion();
+        questionAnswered = true;
     }
   })
 
@@ -184,36 +202,38 @@ function setUpPointRewarding(){
       player2Score-=pointsMinusForWrong;
       changePointsInMeter();
       $player2ScoreBox.fadeIn(1000).text(player2Score);
-    }
-  })
-}
+      }
+    })
+  }
 
 
 function resetForNewQuestion(){
 
-  clearInterval(intervalID);
+    clearInterval(answersIntervalID);
 
-  $wrongAnswers.html('');
-  $rightAnswer.html('');
-  $questionBoxHtml.html('');
-  $allAnswers.fadeOut();
-  // $questionBoxHtml.fadeOut(2000);
-  // $questionBoxHtml.fadeOut();
-  if(playerCounter%2===0){
-    player1Turns.push('1')
-  } else {
-    player2Turns.push('2')
+    $wrongAnswers.html('');
+    $rightAnswer.html('');
+    $questionBoxHtml.html('');
+    $allAnswers.fadeOut();
+    // $questionBoxHtml.fadeOut(2000);
+    // $questionBoxHtml.fadeOut();
+    if(playerCounter%2===0){
+      player1Turns.push('1')
+    } else {
+      player2Turns.push('2')
+    }
+    checkWinner();
+    playerCounter++;
+    questionAnswered = false;
+    counterTime = counterResetTime;
+    $resetButton.fadeIn();
   }
-  checkWinner();
-  playerCounter++;
-  $resetButton.fadeIn();
-}
 
 function newQuestionReady(){
-  $spinner.fadeIn();
-}
+    $spinner.fadeIn();
+  }
+  $resetButton.on('click',newQuestionReady);
 
-$resetButton.on('click',newQuestionReady);
 
 function changePointsInMeter(){
 
@@ -240,34 +260,34 @@ function changePointsInMeter(){
 
 function checkWinner(){
     if(player1Score>=pointsToWin && player1Score>player2Score+pointsAddForCorrect){
-      alert('Player 1 wins! - Player 2 cannot catch up')
+      $alertBox.hide().html('Player 1 wins! - Player 2 cannot catch up').delay(1000).fadeIn(1000);
     } else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
-        alert('Player 2 gets another shot - they are within striking distance!')
+        $alertBox.hide().html('Player 2 gets another shot - they are within striking distance!').delay(1000).fadeIn(1000);
     } else if (player2Score>=pointsToWin){
       if(player2Score>player1Score){
-        alert('Player 2 wins! - High Score!')
+        $alertBox.hide().html('Player 2 wins! - High Score!').delay(1000).fadeIn(1000);
       } else if(player2Score===player1Score){
-        alert('Keep cracking - tie game!')
+        $alertBox.hide().html('Keep cracking - tie game!').delay(1000).fadeIn(1000);
       } else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
-        alert('Player 1 wins! - High Score!');
+        $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
       } else {
-        alert('Keep rolling, the game is still up for grabs!')
+        $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
       }
+    } else{
+      $alertBox.hide().html('Time is up! Next player hit Spin').delay(1000).fadeIn(1000);
     }
   }
 
+function countdownTimer(){
 
-    //   if(player1Turns.length===player2Turns.length){
-    //     if(player1Score>=pointsToWin && player1Score>player2Score){
-    //       alert('Player 1 wins!')
-    //     } else if(player2Score>=pointsToWin && player2Score>player1Score) {
-    //       alert('Player 2 wins!')
-    //     } else if(player1Score>=pointsToWin && player2Score>=pointsToWin && player1Score===player2Score){
-    //       alert('We have a tie!')
-    // if(player1Score>=pointsToWin && player1Score>player2Score+10){
-    //   alert('Player1 wins')
-    // }
-// function createNewCategory(categoryName,questionString,answerString,wrongAnswerArray){
-//   categoryName
-//   categoryArray.push( = new Category()
-// }
+    countdownIntervalID = window.setInterval(function(){
+      if(counterTime>=0 && questionAnswered===false){
+      $alertBox.html(counterTime);
+      counterTime--;
+      } else {
+        clearInterval(countdownIntervalID);
+        // $alertBox.hide().html('Time is up!').fadeIn(1000)
+        resetForNewQuestion();
+      }
+    },1000)
+  }

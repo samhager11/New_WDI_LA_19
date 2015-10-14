@@ -30,7 +30,7 @@ header{
 
 .mainContainer{
   width:800px;
-  height: 575px;
+  height: 545px;
 }
 
 .questionsSection{
@@ -65,7 +65,7 @@ header{
   margin: 0 auto;
 }
 
-.option{
+.categorySelected{
   text-align: center;
   height: 50px;
   width: 500px;
@@ -121,13 +121,17 @@ header{
   width: 100px;
 }
 
-.scoreMeter {
-  height: 300px;
-  width: 50px;
+.alertBox{
+  width: 500px;
+  height: 41px;
+  margin: 0 auto;
+  margin-top: 13px;
+  padding-top: 23px;
+  border-radius: 5px;
+  text-align: center;
   background-color: white;
-  display: inline-block;
-  margin-top: 150px;
 }
+
 
 /*/////////////SIDE PANELS SECTION////////*/
 .player{
@@ -138,6 +142,53 @@ header{
   width: 90px;
   margin-top: 114px;
 }
+
+#player1{
+  float: left;
+  margin-left: -397px;
+}
+
+#player2{
+  float: right;
+  margin-left: 304px;
+}
+
+.scoreMeters {
+  height: 300px;
+  width: 50px;
+  background-color: white;
+  display: inline-block;
+  margin-top: 150px;
+}
+
+#player1Meter{
+  float: left;
+  margin-left: 24px;
+  position: relative;
+}
+
+#progress1{
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(20,20,20,0.6);
+  height: 0px;
+  width: 100%;
+}
+
+#player2Meter{
+  float: right;
+  margin-right: 24px;
+  position: relative;
+}
+
+#progress2{
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(20,20,20,0.6);
+  height: 0px;
+  width: 100%;
+}
+
 
 .score{
   display: inline-block;
@@ -150,50 +201,14 @@ header{
   margin-top: 450px;
 }
 
-#player1{
-  float: left;
-  margin-left: -397px;
-}
 
 #score1{
   float: left;
   margin-left: -375px
 }
 
-#player2{
-  float: right;
-  margin-left: 304px;
-}
 
 #score2{
   float: right;
   margin-left: 324px;
-}
-
-#player1Meter{
-  float: left;
-  margin-left: 24px;
-  position: relative;
-}
-
-#player2Meter{
-  float: right;
-  margin-right: 24px;
-  position: relative;
-}
-
-#progress1{
-  position: absolute;
-  bottom: 0;
-  background-color: rgba(20,20,20,0.6);
-  height: 0px;
-  width: 100%;
-}
-
-#progress2{
-  position: absolute;
-  bottom: 0;
-  background-color: rgba(20,20,20,0.6);
-  height: 0px;
-  width: 100%;
 }
