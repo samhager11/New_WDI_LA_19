@@ -35,10 +35,11 @@ var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAns
 
 var $spinner = $('#spinner');
 var $questionBox = $('.question-frame');
+var $questionBoxHtml = $('.question-html')
 var $resetButton = $('.reset');
 // var $answerBox = $('.answer-frame');
 
-var $scoreBoard = $('.scoreboard');
+var $alertBox = $('.alertSection');
 var $playerBoxes = $('.player');
 var $player1 = $('#player1');
 var $player2 = $('#player2');
@@ -102,30 +103,31 @@ categoryArray.push(getItCategory,eventCategory,searchCategory);
 ///////////////////////////////////////////////////////////////////
 
 function activateSpinCategory(){
-  $questionBox.hide();
+  $questionBoxHtml.html('');
   $allAnswers.hide();
 
   $spinner.on('click', function(){
     $resetButton.fadeOut();
+    $spinner.fadeOut();
 
     activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)]
     var spinCategory = activeCategory.catName
     $('.option' ).html(spinCategory);
-    $spinner.fadeOut();
 
 
     activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
 
-    intervalID = window.setInterval(animateAnswers,3000);
 
-    $questionBox.html(activeQuestion.question).delay(0).fadeIn(0);
+    $questionBoxHtml.html(activeQuestion.question).delay(0).fadeIn(0);
+
+    intervalID = window.setInterval(animateAnswers,3000);
 
     activeAnswer = activeQuestion.answer;
     activeFalseAnswers = activeQuestion.falseAnswers;
 
     $rightAnswer.html(activeAnswer).delay(1000).fadeIn(1000);
 
-    $wrongAnswers.hide().each(function(index){
+    $wrongAnswers.each(function(index){
       $(this).html(activeFalseAnswers[index])
     }).delay(1000).fadeIn(1000);
 
@@ -138,9 +140,9 @@ function activateSpinCategory(){
 function animateAnswers(){
   $allAnswers.each(function(){
     $(this).animate({
-      marginTop:(Math.random()*120),
+      marginTop:(Math.random()*165),
       // marginBottom:(Math.random()*100),
-      marginLeft:(Math.random()*368),
+      marginLeft:(Math.random()*370),
       // marginRight:(Math.random()*100)
     },2000);
   });
@@ -186,9 +188,10 @@ function fadeOnRightAnswer(){
 
   $wrongAnswers.html('');
   $rightAnswer.html('');
-  $questionBox.html('');
+  $questionBoxHtml.html('');
   $allAnswers.fadeOut();
-  $questionBox.fadeOut();
+  // $questionBoxHtml.fadeOut(2000);
+  // $questionBoxHtml.fadeOut();
 
   $resetButton.fadeIn();
 }

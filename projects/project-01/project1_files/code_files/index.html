@@ -7,21 +7,21 @@
   </head>
   <body>
     <div id='screen'>
-
-      <div class='categories'>
-
-        <div class='categoryOptions'>
+    <header>
+    </header>
+        <div class='categoriesBox'>
+          <div class='categoryHeader'>CATEGORY</div>
+          <br>
           <div class='option' id='categ1'>Hit Spin!</div>
         </div>
-        <br>
-        <button id="spinner">Spin Category!</button>
-      </div>
+
 
       <div class='mainContainer'>
-
+        <div class='player1ScoreMeter'></div>
         <div class='questionsSection'>
           <!-- <button id='get-question'>Get Question</button> -->
           <div class='question-frame'>
+            <div class='question-html'></div>
           </div>
         </div>
 
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div class='scoreboard'>
+        <div class='alertSection'>
           <div class='player' id='player1'>PLAYER 1
             <div class='score' id='score1'>0</div>
           </div>
@@ -42,11 +42,14 @@
             <div class='score' id='score2'>0</div>
           </div>
           <button class='reset'>Reset</button>
+          <button id="spinner">Get Crackin</button>
         </div>
 
       </div>
 
     </div>
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
     <script type="text/javascript" src="script.js"></script>
