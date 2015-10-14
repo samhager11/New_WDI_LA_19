@@ -63,6 +63,9 @@ var $rightAnswer = $('.answer.rightAnswer');
 var $wrongAnswers = $('.answer.wrongAnswer')
 var activeFalseAnswers;
 
+
+var pointsToWin = 50;
+var scoreMeterHeight = 300;
 // var category1;
 // var category2;
 // var category3;
@@ -153,6 +156,8 @@ function setUpPointRewarding(){
     if(playerCounter%2===0){
       console.log('Player1 answer working');
       player1Score+=10;
+      changePointsInMeter();
+      checkWinner();
       $player1ScoreBox.text(player1Score);
       fadeOnRightAnswer();
       playerCounter++;
@@ -160,6 +165,8 @@ function setUpPointRewarding(){
     } else {
         console.log('Player2 answer working');
         player2Score+=10;
+        changePointsInMeter();
+        checkWinner();
         $player2ScoreBox.text(player2Score);
         fadeOnRightAnswer();
         playerCounter++;
@@ -169,13 +176,15 @@ function setUpPointRewarding(){
   $wrongAnswers.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 wrong answer working');
-        $(this).fadeOut();
+      $(this).fadeOut();
       player1Score-=5;
+      changePointsInMeter();
       $player1ScoreBox.text(player1Score);
     } else{
       console.log('Player2 wrong answer working');
       $(this).fadeOut();
       player2Score-=5;
+      changePointsInMeter();
       $player2ScoreBox.text(player2Score);
     }
   })
@@ -201,6 +210,43 @@ function newQuestionReady(){
 }
 
 $resetButton.on('click',newQuestionReady);
+
+function changePointsInMeter(){
+
+  if(player1Score>pointsToWin){
+    $('#progress1').animate({
+      height: pointsToWin*(scoreMeterHeight/pointsToWin),
+    }, 2000,'swing');
+  } else {
+    $('#progress1').animate({
+      height: player1Score*(scoreMeterHeight/pointsToWin),
+    }, 2000,'swing');
+  }
+
+  if(player2Score>pointsToWin){
+    $('#progress2').animate({
+      height: pointsToWin*(scoreMeterHeight/pointsToWin),
+    }, 2000,'swing');
+  } else {
+    $('#progress2').animate({
+      height: player2Score*(scoreMeterHeight/pointsToWin),
+    }, 2000,'swing');
+  }
+}
+
+  function checkWinner(){
+    if(player1Score>=pointsToWin || player2Score>=pointsToWin){
+      var storePlayerCounter = playerCounter
+      if(playerCounter%2===0){
+        alert('Player 2 gets one more go!')
+        storePlayerCounter++;
+      }
+      else{
+        alert('Player 2 wins!')
+      }
+    }
+
+  }
 
 // function createNewCategory(categoryName,questionString,answerString,wrongAnswerArray){
 //   categoryName
