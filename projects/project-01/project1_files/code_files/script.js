@@ -1,11 +1,12 @@
-$(document).ready(function (){
+window.onload = function (){
   console.log('jQuery is running')
   // createCategories();
-  rewardPoints();
+  activateSpinCategory();
+  setUpPointRewarding();
 
-})
+}
 
-//Define questions to be passed into Category object constructor. The index of each variable's array is used in the Category object constructor and should follow the arrangement as var newQuestion = ['questionStatement','answerStatement',['falseAnswer1','falseAnswer2','faleseAnswer3']];
+//Define questions to be passed into Category object constructor. The index of each variable's array is used in the Category object constructor and should follow the syntax as var newQuestion = ['questionStatement','answerStatement',['falseAnswer1','falseAnswer2','faleseAnswer3']];
 
 //Get it and Set it Category questions
 var getItQuestion1 = ['Which jQuery method can get or set a specified attribute and its value?','.attr()',['.val()','.addAttr()','.element()']];
@@ -100,36 +101,52 @@ categoryArray.push(getItCategory,eventCategory,searchCategory);
 
 ///////////////////////////////////////////////////////////////////
 
+function activateSpinCategory(){
+  $questionBox.hide();
+  $allAnswers.hide();
 
-$('#spinner').on('click', function(){
+  $spinner.on('click', function(){
+    $resetButton.fadeOut();
 
-  $resetButton.fadeOut();
-
-  activeCategory = categoryArray[Math.floor(Math.random()*3)]
-  var spinCategory = activeCategory.catName
-  $('.option' ).html(spinCategory);
-  $('#spinner').fadeOut();
-
-  activeQuestion = activeCategory.Questions[Math.floor(Math.random()*3)]
-  setTimeout(function(){$questionBox.html(activeQuestion.question)},1000);
-
-  activeAnswer = activeQuestion.answer;
-  setTimeout(function(){$rightAnswer.html(activeAnswer)},2000);
-
-  activeFalseAnswers = activeQuestion.falseAnswers;
-  setTimeout(function(){for (var i = 0; i < $wrongAnswers.length; i++) {
-    $wrongAnswers[i].innerHTML = activeFalseAnswers[i];
-  }},2000);
-
-  $questionBox.fadeIn();
-  $allAnswers.fadeIn();
-  //setTimeout(rewardPoints(),0);
-  //rewardPoints()
-
-})
+    activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)]
+    var spinCategory = activeCategory.catName
+    $('.option' ).html(spinCategory);
+    $spinner.fadeOut();
 
 
-function rewardPoints(){
+    activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
+
+    intervalID = window.setInterval(animateAnswers,3000);
+
+    $questionBox.html(activeQuestion.question).delay(0).fadeIn(0);
+
+    activeAnswer = activeQuestion.answer;
+    activeFalseAnswers = activeQuestion.falseAnswers;
+
+    $rightAnswer.html(activeAnswer).delay(1000).fadeIn(1000);
+
+    $wrongAnswers.hide().each(function(index){
+      $(this).html(activeFalseAnswers[index])
+    }).delay(1000).fadeIn(1000);
+
+    // $questionBox.fadeIn();
+    // $allAnswers.fadeIn();
+
+  })
+}
+
+function animateAnswers(){
+  $allAnswers.each(function(){
+    $(this).animate({
+      marginTop:(Math.random()*120),
+      // marginBottom:(Math.random()*100),
+      marginLeft:(Math.random()*368),
+      // marginRight:(Math.random()*100)
+    },2000);
+  });
+}
+
+function setUpPointRewarding(){
   $rightAnswer.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 answer working');
@@ -137,6 +154,7 @@ function rewardPoints(){
       $player1ScoreBox.text(player1Score);
       fadeOnRightAnswer();
       playerCounter++;
+
     } else {
         console.log('Player2 answer working');
         player2Score+=10;
@@ -163,17 +181,20 @@ function rewardPoints(){
 
 
 function fadeOnRightAnswer(){
-  $wrongAnswers.fadeOut();
+
+  clearInterval(intervalID);
+
   $wrongAnswers.html('');
-  $rightAnswer.fadeOut();
   $rightAnswer.html('');
-  $questionBox.fadeOut();
   $questionBox.html('');
+  $allAnswers.fadeOut();
+  $questionBox.fadeOut();
+
   $resetButton.fadeIn();
 }
 
 function newQuestionReady(){
-  $('#spinner').fadeIn();
+  $spinner.fadeIn();
 }
 
 $resetButton.on('click',newQuestionReady);
