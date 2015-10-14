@@ -64,7 +64,8 @@ var $rightAnswer = $('.answer.rightAnswer');
 var $wrongAnswers = $('.answer.wrongAnswer')
 var activeFalseAnswers;
 
-
+var pointsAddForCorrect=10;
+var pointsMinusForWrong= 3;
 var pointsToWin = 20;
 var scoreMeterHeight = 300;
 // var category1;
@@ -156,14 +157,14 @@ function setUpPointRewarding(){
   $rightAnswer.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 answer working');
-      player1Score+=10;
+      player1Score+=pointsAddForCorrect;
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
       resetForNewQuestion();
 
     } else {
         console.log('Player2 answer working');
-        player2Score+=10;
+        player2Score+=pointsAddForCorrect;
         changePointsInMeter();
         $player2ScoreBox.fadeIn(1000).text(player2Score);
         resetForNewQuestion();
@@ -174,13 +175,13 @@ function setUpPointRewarding(){
     if(playerCounter%2===0){
       console.log('Player1 wrong answer working');
       $(this).fadeOut();
-      player1Score-=5;
+      player1Score-=pointsMinusForWrong;
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
     } else{
       console.log('Player2 wrong answer working');
       $(this).fadeOut();
-      player2Score-=5;
+      player2Score-=pointsMinusForWrong;
       changePointsInMeter();
       $player2ScoreBox.fadeIn(1000).text(player2Score);
     }
@@ -237,8 +238,8 @@ function changePointsInMeter(){
   }
 }
 
-  function checkWinner(){
-    if(player1Score>=pointsToWin && player1Score>player2Score+10){
+function checkWinner(){
+    if(player1Score>=pointsToWin && player1Score>player2Score+pointsAddForCorrect){
       alert('Player 1 wins! - Player 2 cannot catch up')
     } else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
         alert('Player 2 gets another shot - they are within striking distance!')
@@ -254,6 +255,7 @@ function changePointsInMeter(){
       }
     }
   }
+
 
     //   if(player1Turns.length===player2Turns.length){
     //     if(player1Score>=pointsToWin && player1Score>player2Score){

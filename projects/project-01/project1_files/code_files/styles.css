@@ -83,11 +83,11 @@ header{
   background-color: white;
 }
 .question-html{
-  width: 340px;
-  height: 90px;
+  width: 425px;
+  height: 115px;
   margin: 0 auto;
-  margin-top: 40px;
-  padding-top: 5px;
+  margin-top: 18px;
+  padding-top: 23px;
   border-radius: 5px;
 }
 
@@ -114,20 +114,7 @@ header{
 }
 
 /*////Alert Section////*/
-.player{
-  height: 50px;
-  width: 225px;
-  margin: 20px 5px 0px 5px;
-  display: inline-block;
-  background-color: white;
-}
 
-.score{
-  height: 50px;
-  width: 65px;
-  background-color: grey;
-  float: right;
-}
 
 .reset{
   height: 50px;
@@ -140,6 +127,47 @@ header{
   background-color: white;
   display: inline-block;
   margin-top: 150px;
+}
+
+/*/////////////SIDE PANELS SECTION////////*/
+.player{
+  display: inline-block;
+  background-color: white;
+  position: absolute;
+  height: 18px;
+  width: 90px;
+  margin-top: 114px;
+}
+
+.score{
+  display: inline-block;
+  height: 23px;
+  padding-top: 7px;
+  text-align: center;
+  width: 50px;
+  background-color: grey;
+  position: absolute;
+  margin-top: 450px;
+}
+
+#player1{
+  float: left;
+  margin-left: -397px;
+}
+
+#score1{
+  float: left;
+  margin-left: -375px
+}
+
+#player2{
+  float: right;
+  margin-left: 304px;
+}
+
+#score2{
+  float: right;
+  margin-left: 324px;
 }
 
 #player1Meter{
