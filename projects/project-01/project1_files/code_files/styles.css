@@ -12,7 +12,7 @@
   width: 800px;
   height: 700px;
   text-align: center;
-  background-color: rgba(15, 15, 15, .75);
+  background-color: rgba(15, 15, 15, .9);
   border: 20px groove;
   border-radius: 20px;
   border-top-color: rgba(175,124,224,1);
@@ -33,11 +33,8 @@ header{
 
 }
 
-#headerDiv{
+.headerDiv{
   text-align: left;
-  margin-top: 0px;
-  margin-left: -92px;
-  margin-bottom: 0px;
   font-size: 35px;
   /* text-shadow: 0px 0px 20px white; */
   color: white;
@@ -45,6 +42,33 @@ header{
   font-weight: 700
 }
 
+#jTitleLeft{
+  margin-top: 0px;
+  margin-left: -92px;
+  margin-bottom: 0px;
+}
+
+#jTitleRight{
+
+}
+
+.lightning{
+  height: 60px;
+  /*transform: rotate(-15deg);*/
+  position: fixed;
+
+}
+
+#picForLeft{
+  margin-left: -378px;
+  margin-top: 36px;
+}
+
+#picForRight{
+  transform: scaleX(-1);
+  margin-left: 320px;
+  margin-top: 36px;
+}
 
 .categoriesBox{
   height:100px;
@@ -61,21 +85,24 @@ header{
 
 #spinner{
   font-size: 20px;
-  height: 150px;
-  width: 250px;
+  height: 175px;
+  width: 175px;
+  display: block;
   position: fixed;
-  margin-left: 275px;
+  margin-left: 310px;
   margin-top: 250px;
   outline: none;
-  border: ridge;
-  border-width: 90px;
+  border: double;
+  border-width: 40px;
   border-radius: 90px;
   border-top-color: rgba(175,124,224,1);
   border-left-color: rgba(63, 241, 180, 1);
   border-right-color: rgba(232, 105,113, 1);
   border-bottom-color: rgba(250,171,64, 1);
   box-shadow: 0px 0px 98px white;
+  background-color: rgba(15, 15, 15, .75);
   color: white;
+  font-family: 'Oswald', sans-serif;
 }
 
 .mainContainer{
@@ -207,6 +234,7 @@ header{
 
 .alertBox{
   width: 500px;
+  font-size: 20px;
   height: 41px;
   margin: 0 auto;
   margin-top: 13px;
@@ -342,8 +370,9 @@ header{
   height: 23px;
   padding-top: 7px;
   text-align: center;
+  font-family: 'Oswald', sans-serif;
   width: 50px;
-  background-color: grey;
+  /*background-color: grey;*/
   position: absolute;
   margin-top: 470px;
   border-right: 10px groove white;
@@ -355,11 +384,53 @@ header{
 
 #score1{
   float: left;
-  margin-left: -390px
+  margin-left: -390px;
+  display: inline-block;
 }
 
 
 #score2{
   float: right;
   margin-left: 320px;
+  display: inline-block;
+}
+
+/*//////DIALOG BOX MODAL/////////////////*/
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    /*filter: alpha(opacity=50);*/
+}
+
+#modal {
+    position:absolute;
+    /*background:url(tint20.png) 0 0 repeat;*/
+    background:rgba(0,0,0,0.2);
+    border-radius:14px;
+    padding:8px;
+}
+
+#content {
+    border-radius:8px;
+    background:#fff;
+    padding:20px;
+}
+
+#close {
+    /*This is the close button - might be able to change this*/
+    position:absolute;
+    /*background:url(close.png) 0 0 no-repeat;*/
+    width:24px;
+    height:27px;
+    /*a element is default inline*/
+    display:block;
+    /*moves close button text off of the overlay*/
+    text-indent:-9999px;
+    top:-7px;
+    right:-7px;
 }

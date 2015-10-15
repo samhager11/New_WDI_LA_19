@@ -1,29 +1,4 @@
-window.onload = function (){
-  console.log('jQuery is running')
-  // createCategories();
-  activateSpinCategory();
-  setUpPointRewarding();
-  hideDivsNoDelay();
 
-}
-
-function hideDivsNoDelay(){
-  $('.questionsSection').hide();
-  $('.answersSection').hide();
-  $('.alertSection').hide();
-}
-
-function hideDivsWithFade(){
-  $('.questionsSection').delay(1000).fadeOut(8200);
-  $('.answersSection').delay(1000).fadeOut(8200);
-  $('.alertSection').delay(1000).slideUp(8200);
-}
-
-function unhideDivsWithFade(){
-  $('.questionsSection').delay(2000).fadeIn(2000);
-  $('.answersSection').delay(2000).fadeIn(2000);
-  $('.alertSection').delay(2000).slideDown(2000);
-}
 
 //Define questions to be passed into Category object constructor. The index of each variable's array is used in the Category object constructor and should follow the syntax as var newQuestion = ['questionStatement','answerStatement',['falseAnswer1','falseAnswer2','faleseAnswer3']];
 
@@ -52,7 +27,7 @@ var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAns
 
 // Define Global Variables ///////////////////////
 
-var $spinner = $('#spinner');
+var $spinnerButton = $('#spinner');
 // var $questionBox = $('.question-frame');
 var $questionBoxHtml = $('.question-html')
 var $resetButton = $('.reset');
@@ -82,6 +57,7 @@ var player1Turns = [];
 var player2Turns = [];
 var player1Wins = 0;
 var player2Wins = 0;
+var roundsRequired = 1;
 
 var categoryArray=[];
 var activeCategory;
@@ -96,9 +72,12 @@ var activeFalseAnswers;
 var questionAnswered = false;
 var pointsAddForCorrect=10;
 var pointsMinusForWrong= 3;
-var pointsToWin = 20;
+var pointsToWin = 10;
 var scoreMeterHeight = 300;
 
+var $lightning = $('.lightning');
+var $lightningLeft = $('#picForLeft');
+var $lightningRight = $('#picForRight');
 
 
 var counterTime = 5;
@@ -140,48 +119,54 @@ categoryArray.push(getItCategory,eventCategory,searchCategory);
 
 ///////////////////////////////////////////////////////////////////
 
+function setAndShowActiveCategory(){
+  //Select active Category
+  activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
+
+  //set Active Category with Category Name
+  var spinCategory = activeCategory.catName;
+
+  //Display active Category Name in Category box
+  $categorySelected.hide().html(spinCategory).delay(1000).slideDown(1000);
+
+  //Select active question from the category
+  activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
+
+  //Display active question in question box
+  $questionBoxHtml.hide().html(activeQuestion.question).delay(3000).slideDown(1000);
+  $answerBox.hide().delay(5000).fadeIn(1000);
+
+  //Animate answer options in answer box
+  answersIntervalID = window.setInterval(animateAnswers,3000);
+
+  //Select answer for active question
+  activeAnswer = activeQuestion.answer;
+  //Select incorrect answers for active question
+  activeFalseAnswers = activeQuestion.falseAnswers;
+
+  //Display correct answer in answer options
+  $rightAnswer.hide().html(activeAnswer).delay(6000).fadeIn(1000);
+
+  //Display incorrect answers in answer options
+  $wrongAnswers.each(function(index){
+    $(this).hide().html(activeFalseAnswers[index])
+  }).delay(6000).fadeIn(1000);
+}
+
 function activateSpinCategory(){
   // $questionBoxHtml.html('');
   // $allAnswers.hide();
 
-  $spinner.on('click', function(){
+  $spinnerButton.on('click', function(){
     // $resetButton.fadeOut(1000);
-    $spinner.fadeOut(1000);
+    animateSpinner();
+    $lightning.hide()
+
+
     $rightAnswer.removeClass('blueGlow');
     unhideDivsWithFade();
-
-    //Select active Category
-    activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
-
-    //set Active Category with Category Name
-    var spinCategory = activeCategory.catName;
-
-    //Display active Category Name in Category box
-    $categorySelected.hide().html(spinCategory).delay(1000).slideDown(1000);
-
-    //Select active question from the category
-    activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
-
-    //Display active question in question box
-    $questionBoxHtml.hide().html(activeQuestion.question).delay(3000).slideDown(1000);
-    $answerBox.hide().delay(5000).fadeIn(1000);
-
-    //Animate answer options in answer box
-    answersIntervalID = window.setInterval(animateAnswers,3000);
-
-    //Select answer for active question
-    activeAnswer = activeQuestion.answer;
-    //Select incorrect answers for active question
-    activeFalseAnswers = activeQuestion.falseAnswers;
-
-    //Display correct answer in answer options
-    $rightAnswer.hide().html(activeAnswer).delay(6000).fadeIn(1000);
-
-    //Display incorrect answers in answer options
-    $wrongAnswers.each(function(index){
-      $(this).hide().html(activeFalseAnswers[index])
-    }).delay(6000).fadeIn(1000);
-
+    setTimeout(setAndShowActiveCategory(),5000);
+    clickOnAnswers();
     //Display countdown in alert box
     $alertBox.hide().html('Get Ready!').delay(3000).fadeIn(1000)
 
@@ -201,13 +186,38 @@ function animateAnswers(){
   });
 }
 
-function setUpPointRewarding(){
+function animateSpinner(){
+  $spinnerButton.animate({
+    // height: 225,
+    // width: 225,
+    fontSize: 7,
+    borderWidth: 70,
+  },500).animate({
+    // height: 175,
+    // width: 175,
+    fontSize: 20,
+    borderWidth: 40,
+  },500).fadeOut();
+}
+
+function animateLightningLeft(){
+  $lightningLeft.fadeIn(500);
+  $lightningLeft.fadeOut(500);
+  $lightningLeft.fadeIn(500);
+  $lightningLeft.fadeOut(500);
+  $lightningLeft.fadeIn(500);
+  $lightningLeft.fadeOut(500);
+}
+
+function clickOnAnswers(){
   $rightAnswer.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 answer working');
       player1Score+=pointsAddForCorrect;
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
+      $rightAnswer.addClass('blueGlow');
+      $wrongAnswers.hide().fadeOut(1000);
       questionAnswered = true;
 
     } else {
@@ -215,6 +225,8 @@ function setUpPointRewarding(){
         player2Score+=pointsAddForCorrect;
         changePointsInMeter();
         $player2ScoreBox.fadeIn(1000).text(player2Score);
+        $rightAnswer.addClass('blueGlow');
+        $wrongAnswers.hide().fadeOut(1000);
         questionAnswered = true;
     }
   })
@@ -225,13 +237,13 @@ function setUpPointRewarding(){
       $(this).hide();
       player1Score-=pointsMinusForWrong;
       changePointsInMeter();
-      $player1ScoreBox.fadeIn(1000).text(player1Score);
+      $player1ScoreBox.fadeIn(1000).html(player1Score);
     } else{
       console.log('Player2 wrong answer working');
       $(this).hide();
       player2Score-=pointsMinusForWrong;
       changePointsInMeter();
-      $player2ScoreBox.fadeIn(1000).text(player2Score);
+      $player2ScoreBox.fadeIn(1000).html(player2Score);
       }
     })
   }
@@ -241,17 +253,17 @@ function resetForNewQuestion(){
 
   clearInterval(answersIntervalID);
 
-  // $rightAnswer.animate()
   $rightAnswer.addClass('blueGlow');
-  // $rightAnswer.delay(5000).removeClass('blueGlow');
+
+  $rightAnswer.off('click');
+  $wrongAnswers.off('click');
+
+  $wrongAnswers.hide().fadeOut(2000);
+  $rightAnswer.delay(5000).fadeOut(2000);
+
 
   $questionBoxHtml.html('');
-  $allAnswers.delay(5000).fadeOut(2000);
 
-  // $wrongAnswers.delay(5000).html('');
-  // $rightAnswer.delay(7000).html('');
-  // $questionBoxHtml.fadeOut(2000);
-  // $questionBoxHtml.fadeOut();
   if(playerCounter%2===0){
     player1Turns.push('1')
   } else {
@@ -273,7 +285,7 @@ function resetForNewQuestion(){
     }
   },7000)
 
-  $spinner.delay(7000).fadeIn(2000);
+  $spinnerButton.delay(7000).fadeIn(2000);
 }
 
 
@@ -303,13 +315,13 @@ function changePointsInMeter(){
 function clearGame(){
 
   player1Score=0;
-  player1Turns=0;
+  player1Turns=[];
   player2Score=0;
-  player2Turns=0;
+  player2Turns=[];
   playerCounter=0;
   changePointsInMeter()
-  $('#score1').html(player1Score);
-  $('#score2').html(player2Score);
+  $('#score1').hide().text(player1Score).delay(4000).fadeIn(1000);
+  $('#score2').hide().text(player2Score).delay(4000).fadeIn(1000)
   $('#player1Rounds').html(player1Wins);
   $('#player2Rounds').html(player2Wins);
 
@@ -320,7 +332,7 @@ function checkWinner(){
       $alertBox.hide().html('Player 1 wins! - Player 2 cannot catch up').delay(1000).fadeIn(1000);
       console.log('check winner is working')
       player1Wins++;
-      clearGame();
+      setTimeout(clearGame(),7000);
 
     }
       else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
@@ -331,7 +343,7 @@ function checkWinner(){
           if(player2Score>player1Score){
             $alertBox.hide().html('Player 2 wins - High Score!').delay(1000).fadeIn(1000);
             player2Wins++;
-            clearGame();
+            setTimeout(clearGame(),7000)
 
           }
         else if(player2Score===player1Score){
@@ -341,8 +353,7 @@ function checkWinner(){
         else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
           $alertBox.hide().html('Player 1 wins - High Score!').delay(1000).fadeIn(1000);
           player1Wins++;
-          clearGame();
-
+          setTimeout(clearGame(),7000)
         }
         else {
           $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
@@ -352,7 +363,7 @@ function checkWinner(){
       else if(player1Score>=pointsToWin && player1Turns.length===player2Turns.length){
         $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
         player1Wins++;
-        clearGame();
+        setTimeout(clearGame(),7000)
 
       }
       else if(counterTime>0){
@@ -363,13 +374,37 @@ function checkWinner(){
         $alertBox.hide().html('Time is up! Next player hit Spin').delay(1000).fadeIn(1000);
         playerCounter++;
       }
+
+        checkRoundsWon();
     }
+
+function checkRoundsWon(){
+  if(player1Wins>=roundsRequired){
+    hideDivsWithFade();
+    $spinnerButton.hide().fadeOut(1000);
+    $alertBox.html('Player 1 Wins the Game!');
+    $categorySelected.html("Player1 Won! Hit Qrackin' Start Over.");
+    $spinnerButton.off('click');
+    $spinnerButton.on('click', function(){
+      location.reload(true);
+    });
+  } else if (player2Wins>=roundsRequired){
+    hideDivsWithFade();
+    $spinnerButton.hide().fadeOut(1000);
+    $alertBox.html('Player 2 Wins the Game!');
+    $categorySelected.html("Player 2 Won! Hit Qrackin' to Start Over.")
+    $spinnerButton.off('click');
+    $spinnerButton.on('click', function(){
+      location.reload(true);
+    });
+  }
+}
 
 function countdownTimer(){
 
     countdownIntervalID = window.setInterval(function(){
       if(counterTime>=0 && questionAnswered===false){
-      $alertBox.html(counterTime);
+      $alertBox.html("🕒"+counterTime);
       counterTime--;
       } else {
         clearInterval(countdownIntervalID);
@@ -378,3 +413,120 @@ function countdownTimer(){
       }
     },1000)
   }
+
+function hideDivsNoDelay(){
+  $('.questionsSection').hide();
+  $('.answersSection').hide();
+  $('.alertSection').hide();
+}
+
+function hideDivsWithFade(){
+  $('.questionsSection').delay(1000).fadeOut(8200);
+  $('.answersSection').delay(1000).fadeOut(8200);
+  $('.alertSection').delay(1000).slideUp(8200);
+}
+
+function unhideDivsWithFade(){
+  $('.questionsSection').delay(2000).fadeIn(2000);
+  $('.answersSection').delay(2000).fadeIn(2000);
+  $('.alertSection').delay(2000).slideDown(2000);
+}
+
+
+window.onload = function (){
+  console.log('jQuery is running')
+  // createCategories();
+  activateSpinCategory();
+  hideDivsNoDelay();
+
+}
+
+
+
+// // /////////MODAL SCRIPT///////////////////////////////////
+// //
+// // //DEFINES THE MODAL VARIABLES AND METHODS TO BE USED//////
+// var modal = (function(){
+//
+//   method = {};
+//   var $overlay;
+//   var $modal;
+//   var $content;
+//   var $close;
+//
+//     // Append the HTML
+//
+//     // Center the modal in the viewport
+//     method.center = function () {};
+//
+//     // Open the modal
+//     method.open = function (settings) {};
+//
+//     // Close the modal
+//     method.close = function () {};
+//
+//     return method;
+// }());
+//
+// ////////APPENDS THT HTML TO THE DOCUMENT///////////
+//
+//     $overlay = $('<div id="overlay"></div>');
+//     $modal = $('<div id="modal"></div>');
+//     $content = $('<div id="content"></div>');
+//     $close = $('<a id="close" href="#">close</a>');
+//
+//     $modal.hide();
+//     $overlay.hide();
+//     $modal.append($content, $close);
+//
+//     $(document).ready(function(){
+//         $('body').append($overlay, $modal);
+//     });
+//
+// ////////CENTERS THE OVERLAY////////////////
+//
+//   method.center = function () {
+//     var top,
+//         left;
+//
+//     top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+//     left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
+//
+//     $modal.css({
+//         top:top + $(window).scrollTop(),
+//         left:left + $(window).scrollLeft()
+//     });
+//   };
+// ////////OPENS THE OVERLAY///////////////////
+//
+//   method.open = function (settings) {
+//     $content.empty().append(settings.content);
+//
+//     $modal.css({
+//         width: settings.width || 'auto',
+//         height: settings.height || 'auto'
+//     })
+//
+//     method.center();
+//
+//     $(window).bind('resize.modal', method.center);
+//
+//     $modal.show();
+//     $overlay.show();
+//   };
+//
+// //////////////CLOSE THE OVERLAY/////////////////
+//
+//   method.close = function () {
+//     $modal.hide();
+//     $overlay.hide();
+//     $content.empty();
+//     $(window).unbind('resize.modal');
+//   };
+//
+// //////////CLOSE BUTTON///////////////////////
+//
+//   $close.click(function(e){
+//       e.preventDefault();
+//       method.close();
+//   });
