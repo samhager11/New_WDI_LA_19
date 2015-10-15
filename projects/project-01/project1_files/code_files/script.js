@@ -3,8 +3,26 @@ window.onload = function (){
   // createCategories();
   activateSpinCategory();
   setUpPointRewarding();
-  $mainContainer.hide();
+  hideDivsNoDelay();
 
+}
+
+function hideDivsNoDelay(){
+  $('.questionsSection').hide();
+  $('.answersSection').hide();
+  $('.alertSection').hide();
+}
+
+function hideDivsWithFade(){
+  $('.questionsSection').delay(1000).fadeOut(8200);
+  $('.answersSection').delay(1000).fadeOut(8200);
+  $('.alertSection').delay(1000).slideUp(8200);
+}
+
+function unhideDivsWithFade(){
+  $('.questionsSection').delay(2000).fadeIn(2000);
+  $('.answersSection').delay(2000).fadeIn(2000);
+  $('.alertSection').delay(2000).slideDown(2000);
 }
 
 //Define questions to be passed into Category object constructor. The index of each variable's array is used in the Category object constructor and should follow the syntax as var newQuestion = ['questionStatement','answerStatement',['falseAnswer1','falseAnswer2','faleseAnswer3']];
@@ -55,6 +73,7 @@ var player1Score = 0;
 var $player1ScoreBox = $('#score1');
 var player2Score = 0;
 var $player2ScoreBox = $('#score2');
+var $scoreMeters = $('.scoreMeters');
 
 var playerCounter = 0;
 var player1Turns = [];
@@ -67,9 +86,9 @@ var activeCategory;
 var activeQuestion;
 var activeAnswer;
 
-var $allAnswers = $('.answer');
-var $rightAnswer = $('.answer.rightAnswer');
-var $wrongAnswers = $('.answer.wrongAnswer')
+var $allAnswers = $('.answers');
+var $rightAnswer = $('.answers.rightAnswer');
+var $wrongAnswers = $('.answers.wrongAnswer')
 var activeFalseAnswers;
 
 var questionAnswered = false;
@@ -124,7 +143,14 @@ function activateSpinCategory(){
   $spinner.on('click', function(){
     // $resetButton.fadeOut(1000);
     $spinner.fadeOut(1000);
-    $mainContainer.delay(2000).fadeIn(2000);
+    $rightAnswer.removeClass('blueGlow');
+    unhideDivsWithFade();
+
+    if(playerCounter%2===0){
+      $('#player1').addClass('activePlayer')
+    } else{
+      $('#player2').addClass('activePlayer')
+    }
 
     //Select active Category
     activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
@@ -212,41 +238,44 @@ function setUpPointRewarding(){
     })
   }
 
-function glowBlueBorder(){
-  $(this).animate({
-
-  })
-}
 
 
 function resetForNewQuestion(){
 
-    clearInterval(answersIntervalID);
+  clearInterval(answersIntervalID);
 
-    // $rightAnswer.animate()
+  // $rightAnswer.animate()
+  $rightAnswer.addClass('blueGlow');
+  // $rightAnswer.delay(5000).removeClass('blueGlow');
 
-    $wrongAnswers.html('');
-    $rightAnswer.html('');
-    $questionBoxHtml.html('');
-    $allAnswers.fadeOut();
-    // $questionBoxHtml.fadeOut(2000);
-    // $questionBoxHtml.fadeOut();
-    if(playerCounter%2===0){
-      player1Turns.push('1')
-    } else {
-      player2Turns.push('2')
-    }
-    checkWinner();
-    questionAnswered = false;
-    counterTime = counterResetTime;
-    $mainContainer.delay(2000).fadeOut(3000);
-    $spinner.delay(3000).fadeIn(1000);
+  $questionBoxHtml.html('');
+  $allAnswers.delay(5000).fadeOut(2000);
+
+  // $wrongAnswers.delay(5000).html('');
+  // $rightAnswer.delay(7000).html('');
+  // $questionBoxHtml.fadeOut(2000);
+  // $questionBoxHtml.fadeOut();
+  if(playerCounter%2===0){
+    player1Turns.push('1')
+  } else {
+    player2Turns.push('2')
   }
+  checkWinner();
+  $('.player').removeClass('activePlayer');
 
-// function newQuestionReady(){
-//     $spinner.fadeIn();
-//   }
-//   $resetButton.on('click',newQuestionReady);
+  if(playerCounter%2===0){
+    $('#player1').addClass('activePlayer')
+  } else{
+    $('#player2').addClass('activePlayer')
+  }
+  
+  questionAnswered = false;
+  counterTime = counterResetTime;
+  setTimeout(hideDivsWithFade(),7000);
+
+  $spinner.delay(7000).fadeIn(2000);
+}
+
 
 
 function changePointsInMeter(){
