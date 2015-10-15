@@ -74,6 +74,8 @@ var $player1ScoreBox = $('#score1');
 var player2Score = 0;
 var $player2ScoreBox = $('#score2');
 var $scoreMeters = $('.scoreMeters');
+var $player1Progress = $('#progress1');
+var $player2Progress = $('#progress2');
 
 var playerCounter = 0;
 var player1Turns = [];
@@ -96,6 +98,8 @@ var pointsAddForCorrect=10;
 var pointsMinusForWrong= 3;
 var pointsToWin = 20;
 var scoreMeterHeight = 300;
+
+
 
 var counterTime = 5;
 var counterResetTime = 5;
@@ -146,12 +150,6 @@ function activateSpinCategory(){
     $rightAnswer.removeClass('blueGlow');
     unhideDivsWithFade();
 
-    if(playerCounter%2===0){
-      $('#player1').addClass('activePlayer')
-    } else{
-      $('#player2').addClass('activePlayer')
-    }
-
     //Select active Category
     activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
 
@@ -195,9 +193,9 @@ function activateSpinCategory(){
 function animateAnswers(){
   $allAnswers.each(function(){
     $(this).animate({
-      marginTop:(Math.random()*165),
+      marginTop:(Math.random()*140),
       // marginBottom:(Math.random()*100),
-      marginLeft:(Math.random()*370),
+      marginLeft:(Math.random()*320),
       // marginRight:(Math.random()*100)
     },2000);
   });
@@ -224,20 +222,19 @@ function setUpPointRewarding(){
   $wrongAnswers.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 wrong answer working');
-      $(this).fadeOut();
+      $(this).hide();
       player1Score-=pointsMinusForWrong;
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
     } else{
       console.log('Player2 wrong answer working');
-      $(this).fadeOut();
+      $(this).hide();
       player2Score-=pointsMinusForWrong;
       changePointsInMeter();
       $player2ScoreBox.fadeIn(1000).text(player2Score);
       }
     })
   }
-
 
 
 function resetForNewQuestion(){
@@ -260,22 +257,24 @@ function resetForNewQuestion(){
   } else {
     player2Turns.push('2')
   }
-  checkWinner();
-  $('.player').removeClass('activePlayer');
 
-  if(playerCounter%2===0){
-    $('#player1').addClass('activePlayer')
-  } else{
-    $('#player2').addClass('activePlayer')
-  }
-  
+  checkWinner();
+
   questionAnswered = false;
   counterTime = counterResetTime;
   setTimeout(hideDivsWithFade(),7000);
 
+  $('.player').removeClass('activePlayer');
+
+  setTimeout(function(){if(playerCounter%2===0){
+      $('#player1').addClass('activePlayer')
+    } else{
+      $('#player2').addClass('activePlayer')
+    }
+  },7000)
+
   $spinner.delay(7000).fadeIn(2000);
 }
-
 
 
 function changePointsInMeter(){
@@ -283,37 +282,46 @@ function changePointsInMeter(){
   if(player1Score>=pointsToWin){
     $('#progress1').animate({
       height: pointsToWin*(scoreMeterHeight/pointsToWin),
-    }, 2000,'swing');
+    }, 3000,'swing');
   } else {
     $('#progress1').animate({
       height: player1Score*(scoreMeterHeight/pointsToWin),
-    }, 2000,'swing');
+    }, 3000,'swing');
   }
 
   if(player2Score>=pointsToWin){
     $('#progress2').animate({
       height: pointsToWin*(scoreMeterHeight/pointsToWin),
-    }, 2000,'swing');
+    }, 3000,'swing');
   } else {
     $('#progress2').animate({
       height: player2Score*(scoreMeterHeight/pointsToWin),
-    }, 2000,'swing');
+    }, 3000,'swing');
   }
 }
 
 function clearGame(){
+
   player1Score=0;
   player1Turns=0;
   player2Score=0;
   player2Turns=0;
   playerCounter=0;
+  changePointsInMeter()
+  $('#score1').html(player1Score);
+  $('#score2').html(player2Score);
+  $('#player1Rounds').html(player1Wins);
+  $('#player2Rounds').html(player2Wins);
+
 };
 
 function checkWinner(){
     if(player1Score>=pointsToWin && player1Score>player2Score+pointsAddForCorrect){
       $alertBox.hide().html('Player 1 wins! - Player 2 cannot catch up').delay(1000).fadeIn(1000);
-      clearGame();
+      console.log('check winner is working')
       player1Wins++;
+      clearGame();
+
     }
       else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
         $alertBox.hide().html('Player 2 gets another shot - they are within striking distance!').delay(1000).fadeIn(1000);
@@ -322,8 +330,9 @@ function checkWinner(){
       else if (player2Score>=pointsToWin){
           if(player2Score>player1Score){
             $alertBox.hide().html('Player 2 wins - High Score!').delay(1000).fadeIn(1000);
-            clearGame();
             player2Wins++;
+            clearGame();
+
           }
         else if(player2Score===player1Score){
           $alertBox.hide().html('Keep cracking - tie game!').delay(1000).fadeIn(1000);
@@ -331,8 +340,9 @@ function checkWinner(){
         }
         else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
           $alertBox.hide().html('Player 1 wins - High Score!').delay(1000).fadeIn(1000);
-          clearGame();
           player1Wins++;
+          clearGame();
+
         }
         else {
           $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
@@ -341,8 +351,9 @@ function checkWinner(){
       }
       else if(player1Score>=pointsToWin && player1Turns.length===player2Turns.length){
         $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
-        clearGame();
         player1Wins++;
+        clearGame();
+
       }
       else if(counterTime>0){
         $alertBox.hide().html("It's still wide open - next player").delay(1000).fadeIn(1000);
