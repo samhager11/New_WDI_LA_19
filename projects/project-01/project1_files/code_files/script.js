@@ -3,6 +3,7 @@ window.onload = function (){
   // createCategories();
   activateSpinCategory();
   setUpPointRewarding();
+  $mainContainer.hide();
 
 }
 
@@ -34,11 +35,12 @@ var findQuestion3 = ['Test question 3?','answer Q3',['falseAnswer1 Q3','falseAns
 // Define Global Variables ///////////////////////
 
 var $spinner = $('#spinner');
-var $questionBox = $('.question-frame');
+// var $questionBox = $('.question-frame');
 var $questionBoxHtml = $('.question-html')
 var $resetButton = $('.reset');
 var $categorySelected = $('.categorySelected');
-// var $answerBox = $('.answer-frame');
+var $answerBox = $('.answer-frame');
+var $mainContainer = $('.mainContainer');
 
 var $alertSection = $('.alertSection');
 var $alertBox = $('.alertBox')
@@ -57,6 +59,8 @@ var $player2ScoreBox = $('#score2');
 var playerCounter = 0;
 var player1Turns = [];
 var player2Turns = [];
+var player1Wins = 0;
+var player2Wins = 0;
 
 var categoryArray=[];
 var activeCategory;
@@ -118,8 +122,9 @@ function activateSpinCategory(){
   // $allAnswers.hide();
 
   $spinner.on('click', function(){
-    $resetButton.fadeOut(1000);
+    // $resetButton.fadeOut(1000);
     $spinner.fadeOut(1000);
+    $mainContainer.delay(2000).fadeIn(2000);
 
     //Select active Category
     activeCategory = categoryArray[Math.floor(Math.random()*categoryArray.length)];
@@ -134,7 +139,8 @@ function activateSpinCategory(){
     activeQuestion = activeCategory.Questions[Math.floor(Math.random()*categoryArray.length)]
 
     //Display active question in question box
-    $questionBoxHtml.hide().html(activeQuestion.question).delay(3000).fadeIn(1000);
+    $questionBoxHtml.hide().html(activeQuestion.question).delay(3000).slideDown(1000);
+    $answerBox.hide().delay(5000).fadeIn(1000);
 
     //Animate answer options in answer box
     answersIntervalID = window.setInterval(animateAnswers,3000);
@@ -145,18 +151,18 @@ function activateSpinCategory(){
     activeFalseAnswers = activeQuestion.falseAnswers;
 
     //Display correct answer in answer options
-    $rightAnswer.hide().html(activeAnswer).delay(3000).fadeIn(1000);
+    $rightAnswer.hide().html(activeAnswer).delay(6000).fadeIn(1000);
 
     //Display incorrect answers in answer options
     $wrongAnswers.each(function(index){
       $(this).hide().html(activeFalseAnswers[index])
-    }).delay(3000).fadeIn(1000);
+    }).delay(6000).fadeIn(1000);
 
     //Display countdown in alert box
     $alertBox.hide().html('Get Ready!').delay(3000).fadeIn(1000)
 
     //Display timer in alert box and begin countdown
-    setTimeout(countdownTimer,5000);
+    setTimeout(countdownTimer,7000);
   })
 }
 
@@ -206,10 +212,18 @@ function setUpPointRewarding(){
     })
   }
 
+function glowBlueBorder(){
+  $(this).animate({
+
+  })
+}
+
 
 function resetForNewQuestion(){
 
     clearInterval(answersIntervalID);
+
+    // $rightAnswer.animate()
 
     $wrongAnswers.html('');
     $rightAnswer.html('');
@@ -223,16 +237,16 @@ function resetForNewQuestion(){
       player2Turns.push('2')
     }
     checkWinner();
-    playerCounter++;
     questionAnswered = false;
     counterTime = counterResetTime;
-    $resetButton.fadeIn();
+    $mainContainer.delay(2000).fadeOut(3000);
+    $spinner.delay(3000).fadeIn(1000);
   }
 
-function newQuestionReady(){
-    $spinner.fadeIn();
-  }
-  $resetButton.on('click',newQuestionReady);
+// function newQuestionReady(){
+//     $spinner.fadeIn();
+//   }
+//   $resetButton.on('click',newQuestionReady);
 
 
 function changePointsInMeter(){
@@ -258,25 +272,58 @@ function changePointsInMeter(){
   }
 }
 
+function clearGame(){
+  player1Score=0;
+  player1Turns=0;
+  player2Score=0;
+  player2Turns=0;
+  playerCounter=0;
+};
+
 function checkWinner(){
     if(player1Score>=pointsToWin && player1Score>player2Score+pointsAddForCorrect){
       $alertBox.hide().html('Player 1 wins! - Player 2 cannot catch up').delay(1000).fadeIn(1000);
-    } else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
-        $alertBox.hide().html('Player 2 gets another shot - they are within striking distance!').delay(1000).fadeIn(1000);
-    } else if (player2Score>=pointsToWin){
-      if(player2Score>player1Score){
-        $alertBox.hide().html('Player 2 wins! - High Score!').delay(1000).fadeIn(1000);
-      } else if(player2Score===player1Score){
-        $alertBox.hide().html('Keep cracking - tie game!').delay(1000).fadeIn(1000);
-      } else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
-        $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
-      } else {
-        $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
-      }
-    } else{
-      $alertBox.hide().html('Time is up! Next player hit Spin').delay(1000).fadeIn(1000);
+      clearGame();
+      player1Wins++;
     }
-  }
+      else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
+        $alertBox.hide().html('Player 2 gets another shot - they are within striking distance!').delay(1000).fadeIn(1000);
+        playerCounter++;
+    }
+      else if (player2Score>=pointsToWin){
+          if(player2Score>player1Score){
+            $alertBox.hide().html('Player 2 wins - High Score!').delay(1000).fadeIn(1000);
+            clearGame();
+            player2Wins++;
+          }
+        else if(player2Score===player1Score){
+          $alertBox.hide().html('Keep cracking - tie game!').delay(1000).fadeIn(1000);
+          playerCounter++;
+        }
+        else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
+          $alertBox.hide().html('Player 1 wins - High Score!').delay(1000).fadeIn(1000);
+          clearGame();
+          player1Wins++;
+        }
+        else {
+          $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
+          playerCounter++;
+        }
+      }
+      else if(player1Score>=pointsToWin && player1Turns.length===player2Turns.length){
+        $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
+        clearGame();
+        player1Wins++;
+      }
+      else if(counterTime>0){
+        $alertBox.hide().html("It's still wide open - next player").delay(1000).fadeIn(1000);
+        playerCounter++;
+      }
+      else{
+        $alertBox.hide().html('Time is up! Next player hit Spin').delay(1000).fadeIn(1000);
+        playerCounter++;
+      }
+    }
 
 function countdownTimer(){
 

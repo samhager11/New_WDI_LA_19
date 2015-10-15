@@ -3,15 +3,22 @@
 /*////Entire page styles////*/
 
 * {
-  border: 1px dashed black;
+  /*border: 1px dashed black;*/
   margin: 0 auto;
+  color: white;
 }
 
 #screen {
   width: 800px;
   height: 700px;
   text-align: center;
-  background-color: teal;
+  background-color: rgba(15, 15, 15, .75);
+  border: 20px groove;
+  border-radius: 20px;
+  border-top-color: rgba(175,124,224,1);
+  border-left-color: rgba(63, 241, 180, 1);
+  border-right-color: rgba(232, 105,113, 1);
+  border-bottom-color: rgba(250,171,64, 1);
 }
 
 /*///Div containers in body of screen///*/
@@ -25,7 +32,18 @@ header{
 .categoriesBox{
   height:100px;
   width: 600px;
-  background-color: blanchedalmond;
+  background-color: rgba(245, 168,63,1);
+  border-radius: 20px;
+  border: 7px outset white;
+}
+
+#spinner{
+  height: 150px;
+  width: 250px;
+  border-radius: 40px;
+  position: fixed;
+  margin-left: 275px;
+  margin-top: 250px;
 }
 
 .mainContainer{
@@ -35,21 +53,30 @@ header{
 
 .questionsSection{
   width: 600px;
-  height: 200px;
-  background-color: blanchedalmond;
+  height: 175px;
+  background-color: rgba(66,214,160,.8);
+  border: 7px outset white;
+  margin-top: 4px;
+  border-radius: 20px;
 }
 
 .answersSection {
   width: 600px;
-  height: 250px;
-  background-color: blanchedalmond;
+  height: 210px;
+  background-color: rgba(232,105,113,1);
+  border: 7px outset white;
+  margin-top: 4px;
+  border-radius: 20px;
 }
 
 .alertSection{
   width: 600px;
   height: 90px;
-  background-color: blanchedalmond;
+  background-color: rgba(119,70,143,1);
   margin: 0 auto;
+  margin-top: 4px;
+  border: 7px outset white;
+  border-radius: 20px;
 }
 
 /*///Div containers for frames in each body section///*/
@@ -67,39 +94,43 @@ header{
 
 .categorySelected{
   text-align: center;
-  height: 50px;
+  height: 36px;
   width: 500px;
   padding-top: 15px;
-  margin: -15px auto;
+  border-radius: 10px;
+  margin: -20px auto;
+  background-color: rgba(15, 15, 15, .8);
 }
 
 
 /*////Question frame////*/
-.question-frame{
+
+/*.question-frame{
   margin: 0 auto;
   margin-top: 10px;
   width: 500px;
   height: 175px;
   background-color: white;
-}
+}*/
 .question-html{
-  width: 425px;
-  height: 115px;
+  width: 500px;
+  height: 104px;
   margin: 0 auto;
-  margin-top: 18px;
+  margin-top: 28px;
   padding-top: 23px;
-  border-radius: 5px;
+  border-radius: 10px;
+  background-color: rgba(15, 15, 15, .8);
 }
-
 
 
 /*////Answer frame////*/
 .answer-frame{
-  height: 195px;
+  height: 165px;
   width: 500px;
   margin: 0 auto;
   margin-top: 25px;
-  background-color: white;
+  border-radius: 10px;
+  background-color: rgba(15, 15, 15, .8);
   position: relative;
 }
 
@@ -127,16 +158,16 @@ header{
   margin: 0 auto;
   margin-top: 13px;
   padding-top: 23px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  background-color: white;
+  background-color: rgba(15, 15, 15, .8);
 }
 
 
 /*/////////////SIDE PANELS SECTION////////*/
 .player{
   display: inline-block;
-  background-color: white;
+  /*background-color: rgba(15, 15, 15, .75);*/
   position: absolute;
   height: 18px;
   width: 90px;
@@ -146,11 +177,13 @@ header{
 #player1{
   float: left;
   margin-left: -397px;
+  /*background-color: rgba(15, 15, 15, .75);*/
 }
 
 #player2{
   float: right;
   margin-left: 304px;
+  /*background-color: rgba(15, 15, 15, .75);*/
 }
 
 .scoreMeters {
