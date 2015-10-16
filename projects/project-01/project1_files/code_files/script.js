@@ -519,7 +519,7 @@ var closeButton = $('#close-button');
 function spinBox(secondsToSpin){
   // $myModal.text().fadeOut(3000);
 
-  var degreesToSpin = 5
+  var degreesToSpin = 8
   var spinInterval = window.setInterval(function(){
 
     $myModal.animate({
@@ -528,7 +528,7 @@ function spinBox(secondsToSpin){
     },25)
     $myModal.css('transform', "rotate("+degreesToSpin+"deg)");
 
-    degreesToSpin +=5;
+    degreesToSpin +=8;
     console.log(degreesToSpin);
 
   },25);
@@ -553,5 +553,5 @@ closeButton.on('click',function(){
   setTimeout(function(){
     $('#screen').children().fadeIn(5000);
     hideDivsNoDelay();
-  },5000);
+  },7000);
 })
