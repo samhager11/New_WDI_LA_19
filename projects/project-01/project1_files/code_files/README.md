@@ -6,7 +6,7 @@ Javascript and JQuery based Two Player Versus Game
 
 A two-player game that pits the jQuery knowledge of one player against the other. The trivia questions cover an assortment of topics from the jQuery library and are designed to test your lightning quick knowledge of jQuery.
 
-Each player is tasked with answering questions within the allotted time and is awarded points for correct answers. But be careful! Each correct answer is worth 10 points but each wrong answer selected will take 3 points away from your score.
+Each player is tasked with answering questions within the allotted time and is awarded points for correct answers. But be careful! Each correct answer is worth 10 points, while each wrong answer selected will take 3 points away from your score.
 
 Game play alternates between players with the current player being indicated by a white box around the player title. Each match plays to 50 points and the game is won when a player has won 3 rounds.
 
