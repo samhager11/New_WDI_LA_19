@@ -8,6 +8,61 @@
 
 }
 
+/*////////////DIALOG BOX/////////////*/
+#my-modal{
+  position: fixed;
+  height: 500px;
+  width: 500px;
+  left: 20.5%;
+  top: 12%;
+  border: 20px groove;
+  background-color: rgba(15, 15, 15, .9);
+  border-top-color: rgba(175,124,224,1);
+  border-left-color: rgba(63, 241, 180, 1);
+  border-right-color: rgba(232, 105,113, 1);
+  border-bottom-color: rgba(250,171,64, 1);
+  display: none;
+  color: white;
+}
+
+#close-button{
+  height: 40px;
+  width: 70px;
+  border: 5px solid white;
+  box-shadow: 0px 0px 20px white;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  position: relative;
+  margin-top: 362px;
+  margin-left: 219px;
+}
+
+.dialogHeader{
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  font-family: 'Cabin Sketch', cursive;
+  font-weight: 700;
+  margin-left: 107px;
+  margin-top: 20px;
+  position: relative;
+}
+
+#jTitle{
+  margin-top: 0px;
+  margin-left: -92px;
+  margin-bottom: 0px;
+}
+
+.dialogBox{
+  border: 2px solid black;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+}
+
+/*////GAME SCREEN/////////////////////*/
 #screen {
   width: 800px;
   height: 700px;
@@ -21,6 +76,7 @@
   border-bottom-color: rgba(250,171,64, 1);
 
 }
+
 
 /*///Div containers in body of screen///*/
 
@@ -48,15 +104,19 @@ header{
   margin-bottom: 0px;
 }
 
-#jTitleRight{
+/*#jTitleRight{
 
-}
+}*/
 
 .lightning{
   height: 60px;
-  /*transform: rotate(-15deg);*/
+  transform: rotate(-15deg);
   position: fixed;
 
+}
+
+.lightningOpacity{
+  opacity: 0;
 }
 
 #picForLeft{
@@ -65,7 +125,7 @@ header{
 }
 
 #picForRight{
-  transform: scaleX(-1);
+  transform: scaleX(-1) rotate(-15deg);
   margin-left: 320px;
   margin-top: 36px;
 }
@@ -89,7 +149,7 @@ header{
   width: 175px;
   display: block;
   position: fixed;
-  margin-left: 310px;
+  margin-left: 311px;
   margin-top: 250px;
   outline: none;
   border: double;

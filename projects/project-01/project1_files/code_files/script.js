@@ -52,12 +52,7 @@ var $scoreMeters = $('.scoreMeters');
 var $player1Progress = $('#progress1');
 var $player2Progress = $('#progress2');
 
-var playerCounter = 0;
-var player1Turns = [];
-var player2Turns = [];
-var player1Wins = 0;
-var player2Wins = 0;
-var roundsRequired = 1;
+
 
 var categoryArray=[];
 var activeCategory;
@@ -68,6 +63,13 @@ var $allAnswers = $('.answers');
 var $rightAnswer = $('.answers.rightAnswer');
 var $wrongAnswers = $('.answers.wrongAnswer')
 var activeFalseAnswers;
+
+var playerCounter = 0;
+var player1Turns = [];
+var player2Turns = [];
+var player1Wins = 0;
+var player2Wins = 0;
+var roundsRequired = 2;
 
 var questionAnswered = false;
 var pointsAddForCorrect=10;
@@ -160,8 +162,7 @@ function activateSpinCategory(){
   $spinnerButton.on('click', function(){
     // $resetButton.fadeOut(1000);
     animateSpinner();
-    $lightning.hide()
-
+    $lightning.addClass('lightningOpacity');
 
     $rightAnswer.removeClass('blueGlow');
     unhideDivsWithFade();
@@ -200,20 +201,32 @@ function animateSpinner(){
   },500).fadeOut();
 }
 
-function animateLightningLeft(){
-  $lightningLeft.fadeIn(500);
-  $lightningLeft.fadeOut(500);
-  $lightningLeft.fadeIn(500);
-  $lightningLeft.fadeOut(500);
-  $lightningLeft.fadeIn(500);
-  $lightningLeft.fadeOut(500);
-}
+function animateLightningLeft(timeToFlash){
+  var lightningInterval = window.setInterval(function(){
+    $lightningLeft.toggleClass('lightningOpacity')
+  },300)
+  setTimeout(function(){
+    clearInterval(lightningInterval);
+    $lightningLeft.addClass('lightningOpacity')
+  },timeToFlash)
+};
+
+function animateLightningRight(timeToFlash){
+  var lightningInterval = window.setInterval(function(){
+    $lightningRight.toggleClass('lightningOpacity')
+  },300)
+  setTimeout(function(){
+    clearInterval(lightningInterval);
+    $lightningRight.addClass('lightningOpacity')
+  },timeToFlash)
+};
 
 function clickOnAnswers(){
   $rightAnswer.on('click',function(){
     if(playerCounter%2===0){
       console.log('Player1 answer working');
       player1Score+=pointsAddForCorrect;
+      animateLightningLeft(3000);
       changePointsInMeter();
       $player1ScoreBox.fadeIn(1000).text(player1Score);
       $rightAnswer.addClass('blueGlow');
@@ -223,6 +236,7 @@ function clickOnAnswers(){
     } else {
         console.log('Player2 answer working');
         player2Score+=pointsAddForCorrect;
+        animateLightningRight(3000);
         changePointsInMeter();
         $player2ScoreBox.fadeIn(1000).text(player2Score);
         $rightAnswer.addClass('blueGlow');
@@ -247,7 +261,6 @@ function clickOnAnswers(){
       }
     })
   }
-
 
 function resetForNewQuestion(){
 
@@ -320,8 +333,8 @@ function clearGame(){
   player2Turns=[];
   playerCounter=0;
   changePointsInMeter()
-  $('#score1').hide().text(player1Score).delay(4000).fadeIn(1000);
-  $('#score2').hide().text(player2Score).delay(4000).fadeIn(1000)
+  $('#score1').hide().text(player1Score).delay(4000).fadeIn(1000).css('display', 'inline-block');
+  $('#score2').hide().text(player2Score).delay(4000).fadeIn(1000).css('display', 'inline-block')
   $('#player1Rounds').html(player1Wins);
   $('#player2Rounds').html(player2Wins);
 
@@ -330,40 +343,45 @@ function clearGame(){
 function checkWinner(){
     if(player1Score>=pointsToWin && player1Score>player2Score+pointsAddForCorrect){
       $alertBox.hide().html('Player 1 wins! - Player 2 cannot catch up').delay(1000).fadeIn(1000);
+
       console.log('check winner is working')
       player1Wins++;
+      animateLightningLeft(5000);
       setTimeout(clearGame(),7000);
 
     }
       else if (player1Score>=pointsToWin && player1Turns.length>player2Turns.length && player2Score<pointsToWin){
-        $alertBox.hide().html('Player 2 gets another shot - they are within striking distance!').delay(1000).fadeIn(1000);
+        $alertBox.hide().html('Player 2 gets another qrack!').delay(1000).fadeIn(1000);
         playerCounter++;
     }
       else if (player2Score>=pointsToWin){
           if(player2Score>player1Score){
             $alertBox.hide().html('Player 2 wins - High Score!').delay(1000).fadeIn(1000);
             player2Wins++;
+            animateLightningRight(5000);
             setTimeout(clearGame(),7000)
 
           }
         else if(player2Score===player1Score){
-          $alertBox.hide().html('Keep cracking - tie game!').delay(1000).fadeIn(1000);
+          $alertBox.hide().html('Keep qracking - tie game!').delay(1000).fadeIn(1000);
           playerCounter++;
         }
         else if(player2Score<player1Score && player1Turns.length===player2Turns.length ){
           $alertBox.hide().html('Player 1 wins - High Score!').delay(1000).fadeIn(1000);
           player1Wins++;
+          animateLightningLeft(5000);
           setTimeout(clearGame(),7000)
         }
         else {
-          $alertBox.hide().html('Keep rolling, the game is still up for grabs!').delay(1000).fadeIn(1000);
+          $alertBox.hide().html('Keep qracking, the game is still up for grabs!').delay(1000).fadeIn(1000);
           playerCounter++;
         }
       }
       else if(player1Score>=pointsToWin && player1Turns.length===player2Turns.length){
         $alertBox.hide().html('Player 1 wins! - High Score!').delay(1000).fadeIn(1000);
         player1Wins++;
-        setTimeout(clearGame(),7000)
+        animateLightningLeft(5000);
+        setTimeout(clearGame(),7000);
 
       }
       else if(counterTime>0){
@@ -371,11 +389,11 @@ function checkWinner(){
         playerCounter++;
       }
       else{
-        $alertBox.hide().html('Time is up! Next player hit Spin').delay(1000).fadeIn(1000);
+        $alertBox.hide().html("Time is up! Next player get qrackin'").delay(1000).fadeIn(1000);
         playerCounter++;
       }
 
-        checkRoundsWon();
+        setTimeout(checkRoundsWon(),5000);
     }
 
 function checkRoundsWon(){
@@ -383,7 +401,8 @@ function checkRoundsWon(){
     hideDivsWithFade();
     $spinnerButton.hide().fadeOut(1000);
     $alertBox.html('Player 1 Wins the Game!');
-    $categorySelected.html("Player1 Won! Hit Qrackin' Start Over.");
+    animateLightningLeft(7000);
+    $categorySelected.html("Player1 Won! Hit Qrackin' to Start Over.");
     $spinnerButton.off('click');
     $spinnerButton.on('click', function(){
       location.reload(true);
@@ -391,6 +410,7 @@ function checkRoundsWon(){
   } else if (player2Wins>=roundsRequired){
     hideDivsWithFade();
     $spinnerButton.hide().fadeOut(1000);
+    animateLightningRight(7000);
     $alertBox.html('Player 2 Wins the Game!');
     $categorySelected.html("Player 2 Won! Hit Qrackin' to Start Over.")
     $spinnerButton.off('click');
@@ -436,97 +456,53 @@ function unhideDivsWithFade(){
 window.onload = function (){
   console.log('jQuery is running')
   // createCategories();
+  // modal.open({content:"<div class='dialogBox'>Test for Dialog Box</div>"});
   activateSpinCategory();
-  hideDivsNoDelay();
+  $('#screen').children().hide();
+  $myModal.fadeIn(1000);
 
 }
 
+var $myModal = $('#my-modal');
 
+var closeButton = $('#close-button');
 
-// // /////////MODAL SCRIPT///////////////////////////////////
-// //
-// // //DEFINES THE MODAL VARIABLES AND METHODS TO BE USED//////
-// var modal = (function(){
-//
-//   method = {};
-//   var $overlay;
-//   var $modal;
-//   var $content;
-//   var $close;
-//
-//     // Append the HTML
-//
-//     // Center the modal in the viewport
-//     method.center = function () {};
-//
-//     // Open the modal
-//     method.open = function (settings) {};
-//
-//     // Close the modal
-//     method.close = function () {};
-//
-//     return method;
-// }());
-//
-// ////////APPENDS THT HTML TO THE DOCUMENT///////////
-//
-//     $overlay = $('<div id="overlay"></div>');
-//     $modal = $('<div id="modal"></div>');
-//     $content = $('<div id="content"></div>');
-//     $close = $('<a id="close" href="#">close</a>');
-//
-//     $modal.hide();
-//     $overlay.hide();
-//     $modal.append($content, $close);
-//
-//     $(document).ready(function(){
-//         $('body').append($overlay, $modal);
-//     });
-//
-// ////////CENTERS THE OVERLAY////////////////
-//
-//   method.center = function () {
-//     var top,
-//         left;
-//
-//     top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
-//     left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
-//
-//     $modal.css({
-//         top:top + $(window).scrollTop(),
-//         left:left + $(window).scrollLeft()
-//     });
-//   };
-// ////////OPENS THE OVERLAY///////////////////
-//
-//   method.open = function (settings) {
-//     $content.empty().append(settings.content);
-//
-//     $modal.css({
-//         width: settings.width || 'auto',
-//         height: settings.height || 'auto'
-//     })
-//
-//     method.center();
-//
-//     $(window).bind('resize.modal', method.center);
-//
-//     $modal.show();
-//     $overlay.show();
-//   };
-//
-// //////////////CLOSE THE OVERLAY/////////////////
-//
-//   method.close = function () {
-//     $modal.hide();
-//     $overlay.hide();
-//     $content.empty();
-//     $(window).unbind('resize.modal');
-//   };
-//
-// //////////CLOSE BUTTON///////////////////////
-//
-//   $close.click(function(e){
-//       e.preventDefault();
-//       method.close();
-//   });
+function spinBox(secondsToSpin){
+  // $myModal.text().fadeOut(3000);
+
+  var degreesToSpin = 5
+  var spinInterval = window.setInterval(function(){
+
+    $myModal.animate({
+      height: '-=5',
+      width:  '-=5'
+    },25)
+    $myModal.css('transform', "rotate("+degreesToSpin+"deg)");
+
+    degreesToSpin +=5;
+    console.log(degreesToSpin);
+
+  },25);
+
+  setTimeout(function(){
+    $myModal.fadeOut(2000);
+    clearInterval(spinInterval);
+  },secondsToSpin);
+}
+
+closeButton.on('click',function(){
+  // $(this).text().fadeOut(2000);
+  $(this).hide();
+  $myModal.children().not('.dialogHeader').fadeOut(2000);
+  $myModal.children().fadeOut(4000);
+  // $myModal.text().hide();
+  spinBox(5000);
+  // setTimeout( function(){
+  //   $myModal.fadeOut(2000);
+  // },5000);
+
+  setTimeout(function(){
+    $('#screen').children().fadeIn(5000);
+    hideDivsNoDelay();
+  },5000);
+})
