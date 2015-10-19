@@ -1,0 +1,141 @@
+
+
+body{
+  /*color: white;*/
+}
+
+header{
+  border: 2px solid black;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+  /*margin-bottom: 50px;*/
+}
+
+#headerTitle{
+  /*border: 2px solid black;*/
+  font-size: 36px;
+  font-weight: bold;
+  color: black;
+}
+
+/*#tokens{
+  border: 2px dashed blue;
+}*/
+
+
+#vs{
+  /*height: 100px;*/
+  width: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+#x-pic{
+  border: 2px solid black;
+  height: 100px;
+  width: 100px;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYH7kq3SUQaVPw__hjyRi3IP3jQyvlbLOEBM3xG1BlloM7FxEo");
+  background-size: 100px;
+  display: inline-block;
+}
+
+#o-pic{
+  border: 2px solid black;
+  height: 100px;
+  width: 100px;
+  background-image: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQAxeksTefIRWIet_Waw6Aox9a0Y_LL64cmVmPoMP9icfYMhLC9Vw");
+  background-size: 100px;
+  display: inline-block;
+}
+
+#playButton{
+  border: 2px solid black;
+  background: linear-gradient(white,lightskyblue);
+  /*background-color: -webkit-linear-gradient(white, lightskyblue);
+  background-color: -o-linear-gradient(white, lightskyblue);
+  background-color: -moz-linear-gradient(white, lightskyblue;
+  background-color:linear-gradient(white, lightskyblue); */
+  margin: 20px 0px 0px 40px;
+  padding: 15px;
+  font-size: 24px;
+  border-radius: 20px;
+}
+
+#clearBoard{
+  border: 2px solid black;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVNvPFmNAhdoKylmJXaCgpX06wYGgzqx0hJVPNOhTU6i18_u9k");
+  margin: 20px 10px 20px;
+  padding: 15px;
+  font-size: 24px;
+  border-radius: 20px;
+}
+
+#winBoxes{
+  margin-top: 20px;
+}
+#winBoxX{
+  border: 5px solid;
+  border-radius: 5px;
+  display: inline;
+  margin-right: 47px;
+  padding: 10px;
+  border-color: #E437B5;
+  text-align: center;
+}
+#winBoxO{
+  border: 5px solid;
+  border-radius: 5px;
+  display: inline;
+  margin-left: 78px;
+  padding: 10px;
+  border-color: #19B552;
+  text-align: center;
+
+}
+
+.gameBoard{
+  border: 2px solid black;
+  text-align: center;
+  padding: 20px;
+}
+
+.my-box{
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: -4px;
+  /*background-color: black;*/
+}
+
+.x-move{
+  background-image: url("http://www.loyolaphoenix.com/wp-content/uploads/2014/07/cover326x326.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  border: 2px outset black;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: -4px;
+}
+
+.o-move{
+  background-image: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQAxeksTefIRWIet_Waw6Aox9a0Y_LL64cmVmPoMP9icfYMhLC9Vw");
+  background-size: cover;
+  border-radius: 10px;
+  border: 2px outset black;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: -4px;
+}
